@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeCommercial-App"
 include(":app")
- 
+include(":data")
