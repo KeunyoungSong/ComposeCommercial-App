@@ -1,4 +1,4 @@
-package com.keunyoung.di
+package com.keunyoung.presentation
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -18,6 +18,6 @@ class ExampleInstrumentedTest {
 	@Test
 	fun useAppContext() { // Context of the app under test.
 		val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-		assertEquals("com.keunyoung.di.test", appContext.packageName)
+		assertEquals("com.keunyoung.presentation.test", appContext.packageName)
 	}
 }

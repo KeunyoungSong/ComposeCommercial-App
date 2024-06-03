@@ -20,7 +20,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ComposeCommercial-App"
-include(":presentation")
+include(":app")
 include(":data")
 include(":domain")
-include(":di")
+include(":presentation")
