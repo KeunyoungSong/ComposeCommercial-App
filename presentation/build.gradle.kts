@@ -45,6 +45,7 @@ android {
 dependencies {
 	
 	implementation(project(":domain"))
+	debugImplementation(libs.ui.tooling)
 	kapt(libs.hilt.compiler)
 	implementation(libs.hilt.android)
 	implementation(libs.androidx.navigation.compose)
