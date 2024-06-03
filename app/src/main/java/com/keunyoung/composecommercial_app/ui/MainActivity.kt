@@ -1,4 +1,4 @@
-package com.keunyoung.composecommercial_app
+package com.keunyoung.composecommercial_app.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
