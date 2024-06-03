@@ -17,6 +17,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.HiltViewModelFactory
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -26,6 +28,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.keunyoung.composecommercial_app.model.MainNavigationItem
 import com.keunyoung.composecommercial_app.ui.theme.ComposeCommercialAppTheme
+import com.keunyoung.composecommercial_app.viewmodel.MainViewModel
 
 @Preview(showBackground = true)
 @Composable
@@ -37,10 +40,11 @@ fun GreetingPreview() {
 
 @Composable
 fun MainScreen() {
+	val viewModel = hiltViewModel<MainViewModel>()
 	val navHostController = rememberNavController()
 	
 	Scaffold(topBar = {
-		TopAppBar()
+		TopAppBar(viewModel)
 	}, bottomBar = {
 		BottomAppBar(navHostController)
 	}) { innerPadding ->
@@ -99,9 +103,9 @@ fun MainScreen(navController: NavHostController, innerPadding: PaddingValues) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar() {
+fun TopAppBar(viewModel: MainViewModel) {
 	TopAppBar(title = { Text(text = "My App") }, actions = {
-		IconButton(onClick = { /*TODO*/ }) {
+		IconButton(onClick = { viewModel.openSearchForm() }) {
 			Icon(Icons.Filled.Search, "Search Icon")
 		}
 	})
