@@ -2,12 +2,15 @@ package com.keunyoung.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.keunyoung.data.db.converter.LikeConverter
 import com.keunyoung.domain.model.Category
 import com.keunyoung.domain.model.Price
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.model.Shop
 
 @Entity(tableName = "like")
+@TypeConverters(LikeConverter::class)
 data class LikeProductEntity(
 	@PrimaryKey val productId: String,
 	val productName: String,
