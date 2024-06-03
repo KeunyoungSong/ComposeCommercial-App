@@ -39,10 +39,11 @@ fun GreetingPreview() {
 
 @Composable
 fun MainScreen() {
+	val viewModel = hiltViewModel<MainViewModel>()
 	val navHostController = rememberNavController()
 	
 	Scaffold(topBar = {
-		TopAppBar()
+		TopAppBar(viewModel)
 	}, bottomBar = {
 		BottomAppBar(navHostController)
 	}) { innerPadding ->
@@ -59,7 +60,8 @@ fun BottomAppBar(navController: NavController) {
 	)
 	
 	BottomAppBar(
-		containerColor = MaterialTheme.colorScheme.primaryContainer, contentColor = MaterialTheme.colorScheme.primary
+		containerColor = MaterialTheme.colorScheme.primaryContainer,
+		contentColor = MaterialTheme.colorScheme.primary
 	) {
 		val navBackStackEntry by navController.currentBackStackEntryAsState()
 		val currentRoute = navBackStackEntry?.destination?.route
@@ -101,9 +103,9 @@ fun MainScreen(navController: NavHostController, innerPadding: PaddingValues) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar() {
+fun TopAppBar(viewModel: MainViewModel) {
 	TopAppBar(title = { Text(text = "My App") }, actions = {
-		IconButton(onClick = {}) {
+		IconButton(onClick = { viewModel.openSearchForm() }) {
 			Icon(Icons.Filled.Search, "Search Icon")
 		}
 	})
