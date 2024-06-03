@@ -21,10 +21,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.keunyoung.domain.model.Category
+import com.keunyoung.domain.model.Price
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.model.SalesStatus
+import com.keunyoung.domain.model.Shop
 import com.keunyoung.presentation.R
 import com.keunyoung.presentation.ui.theme.Purple80
 
@@ -41,7 +45,6 @@ fun ProductCard(product: Product, onClick: (Product) -> Unit?) {
 		Column(
 			modifier = Modifier
 				.fillMaxWidth()
-				.height(280.dp)
 				.padding(10.dp),
 			verticalArrangement = Arrangement.Center,
 			horizontalAlignment = Alignment.Start
@@ -52,10 +55,11 @@ fun ProductCard(product: Product, onClick: (Product) -> Unit?) {
 				contentScale = ContentScale.Crop,
 				modifier = Modifier
 					.fillMaxWidth()
-					.aspectRatio(1f)
+					.aspectRatio(2f)
 			)
 			Text(text = product.shop.shopName, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
 			Text(text = product.productName, fontSize = 14.sp)
+			Price(product)
 		}
 	}
 }
@@ -89,4 +93,59 @@ private fun Price(product: Product) {
 	}
 }
 
+@Preview
+@Composable
+private fun PreviewProductCard() {
+	ProductCard(
+		product = Product(
+			productId = "1",
+			productName = "상품 이름",
+			imageUrl = "",
+			price = Price(30000, 30000, SalesStatus.ON_SALE),
+			category = Category.Top,
+			shop = Shop("1", "샵 이름", ""),
+			isNew = false,
+			isFreeShipping = false
+		)
+	) {
+	
+	}
+}
 
+@Preview
+@Composable
+private fun PreviewProductCardDiscount(){
+	ProductCard(
+		product = Product(
+			productId = "1",
+			productName = "상품 이름",
+			imageUrl = "",
+			price = Price(30000, 20000, SalesStatus.ON_DISCOUNT),
+			category = Category.Top,
+			shop = Shop("1", "샵 이름", ""),
+			isNew = false,
+			isFreeShipping = false
+		)
+	) {
+	
+	}
+}
+
+@Preview
+@Composable
+private fun PreviewProductCardSoldOut(){
+	ProductCard(
+		product = Product(
+			productId = "1",
+			productName = "상품 이름",
+			imageUrl = "",
+			price = Price(30000, 20000, SalesStatus.SOLD_OUT),
+			category = Category.Top,
+			shop = Shop("1", "샵 이름", ""),
+			isNew = false,
+			isFreeShipping = false
+		)
+	) {
+	
+	}
+}
