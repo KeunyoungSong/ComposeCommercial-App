@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.HiltViewModelFactory
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -40,11 +39,10 @@ fun GreetingPreview() {
 
 @Composable
 fun MainScreen() {
-	val viewModel = hiltViewModel<MainViewModel>()
 	val navHostController = rememberNavController()
 	
 	Scaffold(topBar = {
-		TopAppBar(viewModel)
+		TopAppBar()
 	}, bottomBar = {
 		BottomAppBar(navHostController)
 	}) { innerPadding ->
@@ -103,9 +101,9 @@ fun MainScreen(navController: NavHostController, innerPadding: PaddingValues) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(viewModel: MainViewModel) {
+fun TopAppBar() {
 	TopAppBar(title = { Text(text = "My App") }, actions = {
-		IconButton(onClick = { viewModel.openSearchForm() }) {
+		IconButton(onClick = {}) {
 			Icon(Icons.Filled.Search, "Search Icon")
 		}
 	})

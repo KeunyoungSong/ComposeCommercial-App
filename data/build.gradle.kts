@@ -34,8 +34,8 @@ android {
 dependencies {
 	
 	implementation(project(":domain"))
-	implementation("com.google.dagger:hilt-android:2.49")
-	kapt("com.google.dagger:hilt-compiler:2.49")
+	implementation(libs.hilt.android)
+	kapt(libs.hilt.compiler)
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)

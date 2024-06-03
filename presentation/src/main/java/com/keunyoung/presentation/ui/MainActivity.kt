@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
