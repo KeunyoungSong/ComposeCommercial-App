@@ -2,12 +2,17 @@ package com.keunyoung.composecommercial_app.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -34,15 +39,17 @@ fun GreetingPreview() {
 fun MainScreen() {
 	val navHostController = rememberNavController()
 	
-	Scaffold(bottomBar = {
-		MainBottomNavigationBar(navHostController)
+	Scaffold(topBar = {
+		TopAppBar()
+	}, bottomBar = {
+		BottomAppBar(navHostController)
 	}) { innerPadding ->
-		MainNavigationScreen(navController = navHostController, innerPadding)
+		MainScreen(navController = navHostController, innerPadding)
 	}
 }
 
 @Composable
-fun MainBottomNavigationBar(navController: NavController) {
+fun BottomAppBar(navController: NavController) {
 	val bottomNavigationItems = listOf(
 		MainNavigationItem.Main,
 		MainNavigationItem.Category,
@@ -50,8 +57,7 @@ fun MainBottomNavigationBar(navController: NavController) {
 	)
 	
 	BottomAppBar(
-		containerColor = MaterialTheme.colorScheme.primaryContainer,
-		contentColor = MaterialTheme.colorScheme.primary
+		containerColor = MaterialTheme.colorScheme.primaryContainer, contentColor = MaterialTheme.colorScheme.primary
 	) {
 		val navBackStackEntry by navController.currentBackStackEntryAsState()
 		val currentRoute = navBackStackEntry?.destination?.route
@@ -73,7 +79,7 @@ fun MainBottomNavigationBar(navController: NavController) {
 }
 
 @Composable
-fun MainNavigationScreen(navController: NavHostController, innerPadding: PaddingValues) {
+fun MainScreen(navController: NavHostController, innerPadding: PaddingValues) {
 	NavHost(
 		modifier = Modifier.padding(innerPadding),
 		navController = navController,
@@ -91,3 +97,12 @@ fun MainNavigationScreen(navController: NavHostController, innerPadding: Padding
 	}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar() {
+	TopAppBar(title = { Text(text = "My App") }, actions = {
+		IconButton(onClick = { /*TODO*/ }) {
+			Icon(Icons.Filled.Search, "Search Icon")
+		}
+	})
+}
