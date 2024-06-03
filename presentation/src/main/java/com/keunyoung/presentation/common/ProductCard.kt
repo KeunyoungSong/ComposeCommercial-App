@@ -68,11 +68,11 @@ fun ProductCard(product: Product, onClick: (Product) -> Unit?) {
 private fun Price(product: Product) {
 	when (product.price.salesStatus) {
 		SalesStatus.ON_SALE -> {
-			Text(fontSize = 18.sp, fontWeight = FontWeight.Bold, text = "${product.price.originPrice}")
+			Text(fontSize = 18.sp, fontWeight = FontWeight.Bold, text = "${product.price.originPrice}원")
 		}
 		SalesStatus.ON_DISCOUNT -> {
 			Text(
-				text = "${product.price.originPrice}",
+				text = "${product.price.originPrice}원",
 				fontSize = 18.sp,
 				fontWeight = FontWeight.Bold,
 				textDecoration = TextDecoration.LineThrough
@@ -82,7 +82,7 @@ private fun Price(product: Product) {
 				Text(
 					fontSize = 18.sp,
 					fontWeight = FontWeight.Bold,
-					text = "${product.price.finalPrice}",
+					text = "${product.price.finalPrice}원",
 					color = Purple80
 				)
 			}
