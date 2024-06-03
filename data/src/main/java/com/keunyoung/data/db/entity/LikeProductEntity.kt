@@ -7,7 +7,7 @@ import com.keunyoung.domain.model.Price
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.model.Shop
 
-@Entity(tableName = "purchase")
+@Entity(tableName = "like")
 data class LikeProductEntity(
 	@PrimaryKey val productId: String,
 	val productName: String,
