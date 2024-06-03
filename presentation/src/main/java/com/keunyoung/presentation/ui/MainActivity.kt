@@ -1,4 +1,4 @@
-package com.keunyoung.composecommercial_app.ui
+package com.keunyoung.presentation.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.keunyoung.composecommercial_app.ui.theme.ComposeCommercialAppTheme
+import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

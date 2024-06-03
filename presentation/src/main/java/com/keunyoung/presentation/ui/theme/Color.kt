@@ -1,4 +1,4 @@
-package com.keunyoung.composecommercial_app.ui.theme
+package com.keunyoung.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

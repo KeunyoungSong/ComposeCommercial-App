@@ -1,4 +1,4 @@
-package com.keunyoung.composecommercial_app.model
+package com.keunyoung.presentation.model
 
 class TestUiModel {}
 

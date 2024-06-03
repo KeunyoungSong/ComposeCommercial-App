@@ -1,4 +1,4 @@
-package com.keunyoung.composecommercial_app.ui
+package com.keunyoung.presentation.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -26,9 +26,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.keunyoung.composecommercial_app.model.MainNavigationItem
-import com.keunyoung.composecommercial_app.ui.theme.ComposeCommercialAppTheme
-import com.keunyoung.composecommercial_app.viewmodel.MainViewModel
+import com.keunyoung.presentation.model.MainNavigationItem
+import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
+import com.keunyoung.presentation.viewmodel.MainViewModel
 
 @Preview(showBackground = true)
 @Composable

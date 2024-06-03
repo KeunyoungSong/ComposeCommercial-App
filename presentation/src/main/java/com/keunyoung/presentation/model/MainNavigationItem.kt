@@ -1,4 +1,4 @@
-package com.keunyoung.composecommercial_app.model
+package com.keunyoung.presentation.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox

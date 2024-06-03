@@ -51,11 +51,11 @@ android {
 dependencies {
 	
 	implementation(project(":domain"))
-	implementation("com.google.dagger:hilt-android:2.49")
-	implementation(libs.androidx.navigation.compose)
-	kapt("com.google.dagger:hilt-compiler:2.49")
-	implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+	implementation(project(":data"))
+	implementation(project(":presentation"))
 	
+	implementation("com.google.dagger:hilt-android:2.49")
+	kapt("com.google.dagger:hilt-compiler:2.49")
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)
