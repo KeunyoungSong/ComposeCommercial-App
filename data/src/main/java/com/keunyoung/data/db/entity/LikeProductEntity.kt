@@ -1,12 +1,15 @@
 package com.keunyoung.data.db.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.keunyoung.domain.model.Category
 import com.keunyoung.domain.model.Price
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.model.Shop
 
-data class LikeProductEntity (
-	val productId: String,
+@Entity(tableName = "purchase")
+data class LikeProductEntity(
+	@PrimaryKey val productId: String,
 	val productName: String,
 	val imageUrl: String,
 	val price: Price,
@@ -15,6 +18,7 @@ data class LikeProductEntity (
 	val isNew: Boolean,
 	val isFreeShipping: Boolean,
 )
+
 fun LikeProductEntity.toDomainModel(): Product {
 	return Product(
 		productId = productId,
