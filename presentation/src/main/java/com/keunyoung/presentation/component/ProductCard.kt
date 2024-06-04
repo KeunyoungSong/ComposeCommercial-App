@@ -65,7 +65,7 @@ fun ProductCard(model: Product, onClick: (Product) -> Unit?) {
 }
 
 @Composable
-private fun Price(product: Product) {
+fun Price(product: Product) {
 	when (product.price.salesStatus) {
 		SalesStatus.ON_SALE -> {
 			Text(fontSize = 18.sp, fontWeight = FontWeight.Bold, text = "${product.price.originPrice}원")
