@@ -8,10 +8,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.keunyoung.domain.model.Banner
 import com.keunyoung.domain.model.BannerList
+import com.keunyoung.domain.model.Carousel
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.component.BannerCard
 import com.keunyoung.presentation.component.BannerListCard
+import com.keunyoung.presentation.component.CarouselCard
 import com.keunyoung.presentation.component.ProductCard
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
@@ -29,6 +31,7 @@ fun MainInsideScreen(viewModel: MainViewModel) {
 				is Banner -> BannerCard(model = item)
 				is Product -> ProductCard(model = item) {}
 				is BannerList -> BannerListCard(model = item)
+				is Carousel -> CarouselCard(model = item)
 			}
 		}
 	}
@@ -39,5 +42,6 @@ private fun getSpanCountByType(type: ModelType, defaultColumnCount: Int): Int {
 		ModelType.PRODUCT -> 1
 		ModelType.BANNER -> defaultColumnCount
 		ModelType.BANNER_LIST -> defaultColumnCount
+		ModelType.CAROUSEL -> defaultColumnCount
 	}
 }

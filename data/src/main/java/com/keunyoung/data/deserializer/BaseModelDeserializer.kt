@@ -8,6 +8,7 @@ import com.google.gson.JsonElement
 import com.keunyoung.domain.model.Banner
 import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.BaseModel
+import com.keunyoung.domain.model.Carousel
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
 import java.lang.reflect.Type
@@ -31,6 +32,7 @@ class BaseModelDeserializer : JsonDeserializer<BaseModel> {
 			ModelType.PRODUCT -> gson.fromJson(root, Product::class.java)
 			ModelType.BANNER -> gson.fromJson(root, Banner::class.java)
 			ModelType.BANNER_LIST -> gson.fromJson(root, BannerList::class.java)
+			ModelType.CAROUSEL -> gson.fromJson(root, Carousel::class.java)
 		}
 	}
 }
