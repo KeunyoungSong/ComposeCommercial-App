@@ -1,6 +1,7 @@
 package com.keunyoung.domain.usecase
 
 import com.keunyoung.domain.model.Category
+import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -9,5 +10,9 @@ class CategoryUseCase @Inject constructor(private val repository: CategoryReposi
 	
 	fun getCategoryList(): Flow<List<Category>> {
 		return repository.getCategoryList()
+	}
+	
+	fun getProductsByCategory(category: Category): Flow<List<Product>> {
+		return repository.getProductByCategory(category)
 	}
 }
