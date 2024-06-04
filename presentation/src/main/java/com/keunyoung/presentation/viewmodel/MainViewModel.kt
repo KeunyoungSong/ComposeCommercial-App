@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.keunyoung.domain.model.Banner
 import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.Product
+import com.keunyoung.domain.usecase.CategoryUseCase
 import com.keunyoung.domain.usecase.MainUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,34 +14,41 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val useCase: MainUseCase) : ViewModel() {
+class MainViewModel @Inject constructor(
+	mainUseCase: MainUseCase,
+	categoryUseCase: CategoryUseCase
+) : ViewModel() {
 	private val _columnCount = MutableStateFlow(DEFAULT_COLUMN_COUNT)
 	val columnCount: StateFlow<Int> = _columnCount
 	
-	val modelList = useCase.getModelList()
+	val modelList = mainUseCase.getModelList()
+	val categoryList = categoryUseCase.getCategories()
 	
 	fun openSearchForm() {}
 	
-	fun updateColumnCount(count: Int){
+	fun updateColumnCount(count: Int) {
 		viewModelScope.launch {
 			_columnCount.emit(count)
 		}
 	}
 	
-	fun openProduct(product: Product){
-	
-	}
-	fun openCarouselProduct(product: Product){
-	
-	}
-	fun openBannerList(bannerList: BannerList){
-	
-	}
-	fun openBanner(banner: Banner){
+	fun openProduct(product: Product) {
 	
 	}
 	
-	fun openRankingProduct(product: Product){
+	fun openCarouselProduct(product: Product) {
+	
+	}
+	
+	fun openBannerList(bannerList: BannerList) {
+	
+	}
+	
+	fun openBanner(banner: Banner) {
+	
+	}
+	
+	fun openRankingProduct(product: Product) {
 	
 	}
 	
