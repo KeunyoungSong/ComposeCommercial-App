@@ -18,6 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.keunyoung.domain.model.Banner
+import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.R
@@ -37,6 +38,7 @@ fun MainInsideScreen(viewModel: MainViewModel) {
 			when (val item = modelList[index]) {
 				is Banner -> BannerCard(model = item)
 				is Product -> ProductCard(product = item) {}
+				is BannerList -> TODO()
 			}
 		}
 	}
@@ -46,6 +48,7 @@ private fun getSpanCountByType(type: ModelType, defaultColumnCount: Int): Int {
 	return when(type){
 		ModelType.PRODUCT -> 1
 		ModelType.BANNER -> defaultColumnCount
+		ModelType.BANNER_LIST -> defaultColumnCount
 	}
 }
 

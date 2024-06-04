@@ -6,6 +6,7 @@ import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.keunyoung.domain.model.Banner
+import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.BaseModel
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
@@ -22,16 +23,14 @@ class BaseModelDeserializer : JsonDeserializer<BaseModel> {
 		json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?
 	): BaseModel {
 		val root = json?.asJsonObject
-		val typeString = root?.get(TYPE)?.asString ?: throw IllegalArgumentException("Type is missing")
+		val typeString =
+			root?.get(TYPE)?.asString ?: throw IllegalArgumentException("Type is missing")
 		val type = ModelType.valueOf(typeString)
 		
 		return when (type) {
-			ModelType.PRODUCT -> {
-				gson.fromJson(root, Product::class.java)
-			}
-			ModelType.BANNER -> {
-				gson.fromJson(root, Banner::class.java)
-			}
+			ModelType.PRODUCT -> gson.fromJson(root, Product::class.java)
+			ModelType.BANNER -> gson.fromJson(root, Banner::class.java)
+			ModelType.BANNER_LIST -> gson.fromJson(root, BannerList::class.java)
 		}
 	}
 }
