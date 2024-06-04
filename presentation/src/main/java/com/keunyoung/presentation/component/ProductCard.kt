@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -32,6 +33,7 @@ import com.keunyoung.domain.model.Shop
 import com.keunyoung.presentation.R
 import com.keunyoung.presentation.ui.theme.Purple80
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductCard(model: Product, onClick: (Product) -> Unit?) {
 	Card(
@@ -40,7 +42,8 @@ fun ProductCard(model: Product, onClick: (Product) -> Unit?) {
 			.fillMaxWidth()
 			.padding(10.dp)
 			.height(intrinsicSize = IntrinsicSize.Max)
-			.shadow(10.dp)
+			.shadow(10.dp),
+		onClick = {onClick(model)}
 	) {
 		Column(
 			modifier = Modifier

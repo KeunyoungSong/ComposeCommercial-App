@@ -23,12 +23,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.keunyoung.domain.model.Carousel
-import com.keunyoung.domain.model.Price
 import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.R
 
 @Composable
-fun CarouselCard(model: Carousel) {
+fun CarouselCard(model: Carousel, onClick: (Product) -> Unit) {
 	val scrollState = rememberLazyListState()
 	Column {
 		Text(
@@ -43,7 +42,7 @@ fun CarouselCard(model: Carousel) {
 				.wrapContentWidth()
 		) {
 			items(model.productList.size) { index ->
-				CarouselProductCard(model = model.productList[index]){}
+				CarouselProductCard(model = model.productList[index], onClick)
 			}
 		}
 	}
@@ -73,7 +72,11 @@ private fun CarouselProductCard(model: Product, onClick: (Product) -> Unit) {
 					.fillMaxWidth()
 					.aspectRatio(2f)
 			)
-			Text(text = model.shop.shopName, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+			Text(
+				text = model.shop.shopName,
+				fontSize = 14.sp,
+				fontWeight = FontWeight.SemiBold
+			)
 			Text(text = model.productName, fontSize = 14.sp)
 			Price(model)
 		}

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,9 +24,9 @@ import com.keunyoung.domain.model.BannerList
 import com.keunyoung.presentation.R
 import kotlinx.coroutines.delay
 
-@OptIn(ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun BannerListCard(model: BannerList) {
+fun BannerListCard(model: BannerList, onClick: (BannerList) -> Unit) {
 	val pagerState = rememberPagerState()
 	LaunchedEffect(key1 = pagerState) {
 		autoScrollInfinity(pagerState = pagerState)
@@ -36,7 +37,8 @@ fun BannerListCard(model: BannerList) {
 			modifier = Modifier
 				.fillMaxWidth()
 				.padding(10.dp)
-				.shadow(10.dp)
+				.shadow(10.dp),
+			onClick = {onClick(model)}
 		) {
 			Image(
 				painter = painterResource(id = R.drawable.product_image),
