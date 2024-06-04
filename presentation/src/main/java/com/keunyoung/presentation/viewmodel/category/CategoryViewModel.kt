@@ -22,4 +22,8 @@ class CategoryViewModel @Inject constructor(
 			_productList.emit(it)
 		}
 	}
+	
+	fun openProduct(product: Product){
+	
+	}
 }

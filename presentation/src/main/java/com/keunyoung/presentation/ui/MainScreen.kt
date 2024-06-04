@@ -48,16 +48,20 @@ fun MainScreen() {
 	}, bottomBar = {
 		BottomAppBar(navHostController)
 	}) { innerPadding ->
-		MainScreen(navController = navHostController, innerPadding = innerPadding, viewModel= viewModel)
+		MainScreen(
+			navController = navHostController,
+			innerPadding = innerPadding,
+			viewModel = viewModel
+		)
 	}
 }
 
 @Composable
 fun BottomAppBar(navController: NavController) {
 	val bottomNavigationItems = listOf(
-		MainNavigationItem.Main,
-		MainNavigationItem.Category,
-		MainNavigationItem.MyPage,
+		NavigationItem.MainNav.Home,
+		NavigationItem.MainNav.Category,
+		NavigationItem.MainNav.MyPage,
 	)
 	
 	BottomAppBar(
@@ -84,19 +88,23 @@ fun BottomAppBar(navController: NavController) {
 }
 
 @Composable
-fun MainScreen(navController: NavHostController, innerPadding: PaddingValues, viewModel: MainViewModel) {
+fun MainScreen(
+	navController: NavHostController,
+	innerPadding: PaddingValues,
+	viewModel: MainViewModel
+) {
 	NavHost(
 		modifier = Modifier.padding(innerPadding),
 		navController = navController,
-		startDestination = MainNavigationItem.Main.route,
+		startDestination = NavigationItem.MainNav.Home.route
 	) {
-		composable(MainNavigationItem.Main.route) {
+		composable(NavigationItem.MainNav.Home.route) {
 			MainScreen(viewModel = viewModel)
 		}
-		composable(MainNavigationItem.Category.route) {
+		composable(NavigationItem.MainNav.Category.route) {
 			CategoryScreen(viewModel = viewModel)
 		}
-		composable(MainNavigationItem.MyPage.route) {
+		composable(NavigationItem.MainNav.MyPage.route) {
 			Text("MyPage")
 		}
 	}
