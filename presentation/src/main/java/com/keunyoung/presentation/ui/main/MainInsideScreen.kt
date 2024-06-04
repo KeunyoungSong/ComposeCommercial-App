@@ -22,6 +22,7 @@ import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.R
+import com.keunyoung.presentation.component.BannerCard
 import com.keunyoung.presentation.component.ProductCard
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
@@ -49,24 +50,5 @@ private fun getSpanCountByType(type: ModelType, defaultColumnCount: Int): Int {
 		ModelType.PRODUCT -> 1
 		ModelType.BANNER -> defaultColumnCount
 		ModelType.BANNER_LIST -> defaultColumnCount
-	}
-}
-
-@Composable
-fun BannerCard(model: Banner) {
-	Card(
-		shape = RoundedCornerShape(8.dp), modifier = Modifier
-			.fillMaxWidth()
-			.padding(10.dp)
-			.shadow(10.dp)
-	) {
-		Image(
-			painter = painterResource(id = R.drawable.product_image),
-			contentDescription = null,
-			contentScale = ContentScale.Crop,
-			modifier = Modifier
-				.fillMaxWidth()
-				.aspectRatio(2f)
-		)
 	}
 }
