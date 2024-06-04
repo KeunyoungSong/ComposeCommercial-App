@@ -3,6 +3,6 @@ package com.keunyoung.domain.model
 data class Carousel(
 	val carouselId: String,
 	val title: String,
-	val product: List<Product>,
+	val productList: List<Product>,
 	override val type: ModelType = ModelType.CAROUSEL
 ) : BaseModel()
