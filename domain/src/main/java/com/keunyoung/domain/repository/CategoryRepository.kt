@@ -1,7 +1,8 @@
 package com.keunyoung.domain.repository
 
 import com.keunyoung.domain.model.Category
+import kotlinx.coroutines.flow.Flow
 
 interface CategoryRepository {
-	fun getCategories(): List<Category>
+	fun getCategories(): Flow<List<Category>>
 }
