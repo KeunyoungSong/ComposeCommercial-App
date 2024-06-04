@@ -12,7 +12,7 @@ import javax.inject.Inject
 class CategoryRepositoryImpl @Inject constructor(
 	private val dataSource: ProductDataSource
 ) : CategoryRepository {
-	override fun getCategories(): Flow<List<Category>> = flow {        // 서버로 부터 동적으로 받아옴
+	override fun getCategoryList(): Flow<List<Category>> = flow {        // 서버로 부터 동적으로 받아옴
 		emit(
 			listOf(
 				Category.Top,

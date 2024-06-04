@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
 	val columnCount: StateFlow<Int> = _columnCount
 	
 	val modelList: Flow<List<BaseModel>> = mainUseCase.getModelList()
-	val categoryList: Flow<List<Category>> = categoryUseCase.getCategories()
+	val categoryList: Flow<List<Category>> = categoryUseCase.getCategoryList()
 	
 	fun openSearchForm() {}
 	
