@@ -9,5 +9,5 @@ enum class ModelType {
     BANNER,
     BANNER_LIST,
     CAROUSEL,
-//    RANKING,
+    RANKING,
 }
