@@ -25,7 +25,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.keunyoung.presentation.model.MainNavigationItem
 import com.keunyoung.presentation.ui.main.CategoryScreen
 import com.keunyoung.presentation.ui.main.MainScreen
 import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
