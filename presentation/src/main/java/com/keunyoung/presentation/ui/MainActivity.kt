@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 	}
 	
 	companion object {
-		private const val DEFAULT_COLUMN_SIZE = 160
+		private const val DEFAULT_COLUMN_SIZE = 120
 	}
 }
 
