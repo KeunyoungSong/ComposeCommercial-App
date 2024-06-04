@@ -1,28 +1,17 @@
 package com.keunyoung.presentation.ui.main
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.keunyoung.domain.model.Banner
 import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
-import com.keunyoung.presentation.R
 import com.keunyoung.presentation.component.BannerCard
+import com.keunyoung.presentation.component.BannerListCard
 import com.keunyoung.presentation.component.ProductCard
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
@@ -38,8 +27,8 @@ fun MainInsideScreen(viewModel: MainViewModel) {
 		}) { index ->
 			when (val item = modelList[index]) {
 				is Banner -> BannerCard(model = item)
-				is Product -> ProductCard(product = item) {}
-				is BannerList -> TODO()
+				is Product -> ProductCard(model = item) {}
+				is BannerList -> BannerListCard(model = item)
 			}
 		}
 	}

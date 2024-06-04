@@ -33,7 +33,7 @@ import com.keunyoung.presentation.R
 import com.keunyoung.presentation.ui.theme.Purple80
 
 @Composable
-fun ProductCard(product: Product, onClick: (Product) -> Unit?) {
+fun ProductCard(model: Product, onClick: (Product) -> Unit?) {
 	Card(
 		shape = RoundedCornerShape(8.dp),
 		modifier = Modifier
@@ -57,9 +57,9 @@ fun ProductCard(product: Product, onClick: (Product) -> Unit?) {
 					.fillMaxWidth()
 					.aspectRatio(2f)
 			)
-			Text(text = product.shop.shopName, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
-			Text(text = product.productName, fontSize = 14.sp)
-			Price(product)
+			Text(text = model.shop.shopName, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+			Text(text = model.productName, fontSize = 14.sp)
+			Price(model)
 		}
 	}
 }
@@ -97,7 +97,7 @@ private fun Price(product: Product) {
 @Composable
 private fun PreviewProductCard() {
 	ProductCard(
-		product = Product(
+		model = Product(
 			productId = "1",
 			productName = "상품 이름",
 			imageUrl = "",
@@ -116,7 +116,7 @@ private fun PreviewProductCard() {
 @Composable
 private fun PreviewProductCardDiscount(){
 	ProductCard(
-		product = Product(
+		model = Product(
 			productId = "1",
 			productName = "상품 이름",
 			imageUrl = "",
@@ -135,7 +135,7 @@ private fun PreviewProductCardDiscount(){
 @Composable
 private fun PreviewProductCardSoldOut(){
 	ProductCard(
-		product = Product(
+		model = Product(
 			productId = "1",
 			productName = "상품 이름",
 			imageUrl = "",
