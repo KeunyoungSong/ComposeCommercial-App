@@ -22,7 +22,7 @@ import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.R
-import com.keunyoung.presentation.common.ProductCard
+import com.keunyoung.presentation.component.ProductCard
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
 @Composable

@@ -1,4 +1,4 @@
-package com.keunyoung.presentation.common
+package com.keunyoung.presentation.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
