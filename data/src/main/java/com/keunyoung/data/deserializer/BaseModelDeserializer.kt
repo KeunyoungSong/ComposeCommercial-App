@@ -11,6 +11,7 @@ import com.keunyoung.domain.model.BaseModel
 import com.keunyoung.domain.model.Carousel
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
+import com.keunyoung.domain.model.Ranking
 import java.lang.reflect.Type
 
 class BaseModelDeserializer : JsonDeserializer<BaseModel> {
@@ -33,6 +34,7 @@ class BaseModelDeserializer : JsonDeserializer<BaseModel> {
 			ModelType.BANNER -> gson.fromJson(root, Banner::class.java)
 			ModelType.BANNER_LIST -> gson.fromJson(root, BannerList::class.java)
 			ModelType.CAROUSEL -> gson.fromJson(root, Carousel::class.java)
+			ModelType.RANKING -> gson.fromJson(root, Ranking::class.java)
 		}
 	}
 }
