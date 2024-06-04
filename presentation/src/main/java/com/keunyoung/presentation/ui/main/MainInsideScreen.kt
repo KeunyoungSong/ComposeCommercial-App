@@ -11,10 +11,12 @@ import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.Carousel
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
+import com.keunyoung.domain.model.Ranking
 import com.keunyoung.presentation.component.BannerCard
 import com.keunyoung.presentation.component.BannerListCard
 import com.keunyoung.presentation.component.CarouselCard
 import com.keunyoung.presentation.component.ProductCard
+import com.keunyoung.presentation.component.RankingCard
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
 @Composable
@@ -40,6 +42,9 @@ fun MainInsideScreen(viewModel: MainViewModel) {
 				is Carousel -> CarouselCard(model = item){
 					viewModel.openCarouselProduct(it)
 				}
+				is Ranking -> RankingCard(model = item) {
+					viewModel.openRankingProduct(it)
+				}
 			}
 		}
 	}
@@ -51,5 +56,6 @@ private fun getSpanCountByType(type: ModelType, defaultColumnCount: Int): Int {
 		ModelType.BANNER -> defaultColumnCount
 		ModelType.BANNER_LIST -> defaultColumnCount
 		ModelType.CAROUSEL -> defaultColumnCount
+		ModelType.RANKING -> defaultColumnCount
 	}
 }

@@ -36,15 +36,13 @@ import com.keunyoung.presentation.ui.theme.Purple80
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductCard(model: Product, onClick: (Product) -> Unit?) {
-	Card(
-		shape = RoundedCornerShape(8.dp),
+	Card(shape = RoundedCornerShape(8.dp),
 		modifier = Modifier
 			.fillMaxWidth()
 			.padding(10.dp)
 			.height(intrinsicSize = IntrinsicSize.Max)
 			.shadow(10.dp),
-		onClick = {onClick(model)}
-	) {
+		onClick = { onClick(model) }) {
 		Column(
 			modifier = Modifier
 				.fillMaxWidth()
@@ -60,7 +58,11 @@ fun ProductCard(model: Product, onClick: (Product) -> Unit?) {
 					.fillMaxWidth()
 					.aspectRatio(2f)
 			)
-			Text(text = model.shop.shopName, fontSize = 14.sp, fontWeight = FontWeight.SemiBold)
+			Text(
+				text = model.shop.shopName,
+				fontSize = 14.sp,
+				fontWeight = FontWeight.SemiBold
+			)
 			Text(text = model.productName, fontSize = 14.sp)
 			Price(model)
 		}
@@ -71,7 +73,11 @@ fun ProductCard(model: Product, onClick: (Product) -> Unit?) {
 fun Price(product: Product) {
 	when (product.price.salesStatus) {
 		SalesStatus.ON_SALE -> {
-			Text(fontSize = 18.sp, fontWeight = FontWeight.Bold, text = "${product.price.originPrice}원")
+			Text(
+				fontSize = 18.sp,
+				fontWeight = FontWeight.Bold,
+				text = "${product.price.originPrice}원"
+			)
 		}
 		SalesStatus.ON_DISCOUNT -> {
 			Text(
@@ -80,7 +86,7 @@ fun Price(product: Product) {
 				fontWeight = FontWeight.Bold,
 				textDecoration = TextDecoration.LineThrough
 			)
-			Row {
+			Row(verticalAlignment = Alignment.CenterVertically) {
 				Text(fontSize = 14.sp, fontWeight = FontWeight.Bold, text = "할인가: ")
 				Text(
 					fontSize = 18.sp,
@@ -91,7 +97,12 @@ fun Price(product: Product) {
 			}
 		}
 		SalesStatus.SOLD_OUT -> {
-			Text(fontSize = 18.sp, fontWeight = FontWeight.Bold, text = "판매종료", color = Color(0xFF666666))
+			Text(
+				fontSize = 18.sp,
+				fontWeight = FontWeight.Bold,
+				text = "판매종료",
+				color = Color(0xFF666666)
+			)
 		}
 	}
 }
@@ -117,7 +128,7 @@ private fun PreviewProductCard() {
 
 @Preview
 @Composable
-private fun PreviewProductCardDiscount(){
+private fun PreviewProductCardDiscount() {
 	ProductCard(
 		model = Product(
 			productId = "1",
@@ -136,7 +147,7 @@ private fun PreviewProductCardDiscount(){
 
 @Preview
 @Composable
-private fun PreviewProductCardSoldOut(){
+private fun PreviewProductCardSoldOut() {
 	ProductCard(
 		model = Product(
 			productId = "1",

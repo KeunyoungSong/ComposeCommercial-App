@@ -40,6 +40,10 @@ class MainViewModel @Inject constructor(private val useCase: MainUseCase) : View
 	
 	}
 	
+	fun openRankingProduct(product: Product){
+	
+	}
+	
 	companion object {
 		private const val DEFAULT_COLUMN_COUNT = 2
 	}
