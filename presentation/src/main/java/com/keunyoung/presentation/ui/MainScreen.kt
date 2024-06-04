@@ -26,7 +26,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.keunyoung.presentation.model.MainNavigationItem
-import com.keunyoung.presentation.ui.main.MainInsideScreen
+import com.keunyoung.presentation.ui.main.CategoryScreen
+import com.keunyoung.presentation.ui.main.MainScreen
 import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
@@ -91,10 +92,10 @@ fun MainScreen(navController: NavHostController, innerPadding: PaddingValues, vi
 		startDestination = MainNavigationItem.Main.route,
 	) {
 		composable(MainNavigationItem.Main.route) {
-			MainInsideScreen(viewModel = viewModel)
+			MainScreen(viewModel = viewModel)
 		}
 		composable(MainNavigationItem.Category.route) {
-			Text("Category")
+			CategoryScreen(viewModel = viewModel)
 		}
 		composable(MainNavigationItem.MyPage.route) {
 			Text("MyPage")
