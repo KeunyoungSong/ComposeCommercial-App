@@ -7,7 +7,7 @@ sealed class BaseModel {
 enum class ModelType {
     PRODUCT,
     BANNER,
-    BANNER_LIST,
-    CAROUSEL,
-    RANKING,
+//    BANNER_LIST,
+//    CAROUSEL,
+//    RANKING,
 }
