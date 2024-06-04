@@ -4,8 +4,9 @@ import com.keunyoung.domain.model.Category
 import com.keunyoung.domain.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class CategoryRepositoryImpl : CategoryRepository {
+class CategoryRepositoryImpl @Inject constructor(): CategoryRepository {
 	override fun getCategories(): Flow<List<Category>> = flow {		// 서버로 부터 동적으로 받아옴
 		emit(
 			listOf(
