@@ -12,11 +12,11 @@ import com.keunyoung.domain.model.Carousel
 import com.keunyoung.domain.model.ModelType
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.model.Ranking
-import com.keunyoung.presentation.component.BannerCard
-import com.keunyoung.presentation.component.BannerListCard
-import com.keunyoung.presentation.component.CarouselCard
-import com.keunyoung.presentation.component.ProductCard
-import com.keunyoung.presentation.component.RankingCard
+import com.keunyoung.presentation.ui.component.BannerCard
+import com.keunyoung.presentation.ui.component.BannerListCard
+import com.keunyoung.presentation.ui.component.CarouselCard
+import com.keunyoung.presentation.ui.component.ProductCard
+import com.keunyoung.presentation.ui.component.RankingCard
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
 @Composable

@@ -1,4 +1,4 @@
-package com.keunyoung.presentation.component
+package com.keunyoung.presentation.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
