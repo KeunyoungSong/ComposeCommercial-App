@@ -52,6 +52,7 @@ dependencies {
 	implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 	implementation("com.google.accompanist:accompanist-pager:0.23.1")
 	implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
+	implementation("com.google.code.gson:gson:2.11.0")
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)
