@@ -12,7 +12,7 @@ import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.usecase.CategoryUseCase
 import com.keunyoung.domain.usecase.MainUseCase
 import com.keunyoung.presentation.ui.NavigationRouteName
-import com.keunyoung.presentation.ui.utils.NavigationUtils
+import com.keunyoung.presentation.utils.NavigationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

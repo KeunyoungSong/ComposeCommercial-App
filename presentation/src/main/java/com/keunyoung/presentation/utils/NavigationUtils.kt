@@ -1,4 +1,4 @@
-package com.keunyoung.presentation.ui.utils
+package com.keunyoung.presentation.utils
 
 import android.net.Uri
 import android.os.Parcelable
