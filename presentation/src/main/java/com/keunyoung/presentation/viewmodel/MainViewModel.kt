@@ -3,13 +3,13 @@ package com.keunyoung.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.keunyoung.domain.model.Banner
-import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.BaseModel
 import com.keunyoung.domain.model.Category
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.usecase.CategoryUseCase
 import com.keunyoung.domain.usecase.MainUseCase
+import com.keunyoung.presentation.delegate.BannerDelegate
+import com.keunyoung.presentation.delegate.CategoryDelegate
 import com.keunyoung.presentation.delegate.ProductDelegate
 import com.keunyoung.presentation.ui.NavigationRouteName
 import com.keunyoung.presentation.utils.NavigationUtils
@@ -23,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
 	mainUseCase: MainUseCase, categoryUseCase: CategoryUseCase
-) : ViewModel(), ProductDelegate {
+) : ViewModel(), ProductDelegate, BannerDelegate, CategoryDelegate {
 	private val _columnCount = MutableStateFlow(DEFAULT_COLUMN_COUNT)
 	val columnCount: StateFlow<Int> = _columnCount
 	
@@ -42,29 +42,19 @@ class MainViewModel @Inject constructor(
 		// TODO
 	}
 	
-	fun openCarouselProduct(product: Product) {
+	override fun openBanner(bannerId: String) {
 	
 	}
 	
-	fun openBannerList(bannerList: BannerList) {
-	
-	}
-	
-	fun openBanner(banner: Banner) {
-	
-	}
-	
-	fun openRankingProduct(product: Product) {
-	
-	}
-	
-	fun openCategory(navHostController: NavHostController, category: Category) {
+	override fun openCategory(navHostController: NavHostController, category: Category) {
 		NavigationUtils.navigate(
 			navHostController, NavigationRouteName.CATEGORY, category
 		)
 	}
 	
+	
 	companion object {
 		private const val DEFAULT_COLUMN_COUNT = 2
 	}
+	
 }

@@ -1,5 +1,7 @@
 package com.keunyoung.presentation.model
 
-abstract class PresentationVM {
+import com.keunyoung.domain.model.BaseModel
+
+abstract class PresentationVM(model: BaseModel) {
 
 }
