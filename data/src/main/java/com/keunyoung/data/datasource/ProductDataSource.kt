@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.keunyoung.data.deserializer.BaseModelDeserializer
 import com.keunyoung.domain.model.BaseModel
-import com.keunyoung.domain.model.Product
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -15,7 +14,7 @@ import javax.inject.Inject
 class ProductDataSource @Inject constructor(
 	@ApplicationContext private val context: Context
 ) {
-	fun getProducts(): Flow<List<Product>> = flow {
+	fun getProducts(): Flow<List<BaseModel>> = flow {
 		val inputStream = context.assets.open("product_list.json")
 		val inputStreamReader = InputStreamReader(inputStream)
 		val jsonString = inputStreamReader.readText()
