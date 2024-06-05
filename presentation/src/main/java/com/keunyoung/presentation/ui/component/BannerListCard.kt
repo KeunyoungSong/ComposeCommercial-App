@@ -20,25 +20,25 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import com.keunyoung.domain.model.BannerList
 import com.keunyoung.presentation.R
+import com.keunyoung.presentation.model.BannerListVM
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun BannerListCard(model: BannerList, onClick: (BannerList) -> Unit) {
+fun BannerListCard(presentationVM: BannerListVM) {
 	val pagerState = rememberPagerState()
 	LaunchedEffect(key1 = pagerState) {
 		autoScrollInfinity(pagerState = pagerState)
 	}
-	HorizontalPager(count = model.imageList.size, state = pagerState) { pageNumber ->
+	HorizontalPager(count = presentationVM.model.imageList.size, state = pagerState) { pageNumber ->
 		Card(
 			shape = RoundedCornerShape(8.dp),
 			modifier = Modifier
 				.fillMaxWidth()
 				.padding(10.dp)
 				.shadow(10.dp),
-			onClick = {onClick(model)}
+			onClick = {presentationVM.openBannerList(presentationVM.model.bannerId)}
 		) {
 			Image(
 				painter = painterResource(id = R.drawable.product_image),

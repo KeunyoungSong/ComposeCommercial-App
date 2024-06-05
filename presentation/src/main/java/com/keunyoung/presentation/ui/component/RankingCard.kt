@@ -20,26 +20,30 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.keunyoung.domain.model.Product
-import com.keunyoung.domain.model.Ranking
 import com.keunyoung.presentation.R
+import com.keunyoung.presentation.model.RankingVM
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun RankingCard(model: Ranking, onClick: (Product) -> Unit) {
+fun RankingCard(presentationVM: RankingVM) {
 	val pagerState = rememberPagerState()
-	val pageCount = model.productList.size / DEFAULT_RANKING_ITEM_COUNT
+	val pageCount = presentationVM.model.productList.size / DEFAULT_RANKING_ITEM_COUNT
 	
 	Column {
-		Text(text = model.title, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+		Text(text = presentationVM.model.title, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
 		HorizontalPager(
-			count = pageCount,
-			state = pagerState,
-			contentPadding = PaddingValues(end = 140.dp)
+			count = pageCount, state = pagerState, contentPadding = PaddingValues(end = 140.dp)
 		) { index ->
 			Column {
-				RankingProductCard(index * 3, model.productList[index * 3], onClick)
-				RankingProductCard(index * 3 + 1, model.productList[index * 3 + 1], onClick)
-				RankingProductCard(index * 3 + 2, model.productList[index * 3 + 2], onClick)
+				RankingProductCard(
+					index * 3, presentationVM.model.productList[index * 3]
+				) { product -> presentationVM.openRankingProduct(product = product) }
+				RankingProductCard(
+					index * 3 + 1, presentationVM.model.productList[index * 3 + 1]
+				) { product -> presentationVM.openRankingProduct(product = product) }
+				RankingProductCard(
+					index * 3 + 2, presentationVM.model.productList[index * 3 + 2]
+				) { product -> presentationVM.openRankingProduct(product = product) }
 			}
 		}
 	}

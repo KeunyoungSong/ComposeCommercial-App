@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,16 +23,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.keunyoung.domain.model.Carousel
 import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.R
+import com.keunyoung.presentation.model.CarouselVM
 
 @Composable
-fun CarouselCard(model: Carousel, onClick: (Product) -> Unit) {
+fun CarouselCard(presentationVM: CarouselVM) {
 	val scrollState = rememberLazyListState()
 	Column {
 		Text(
-			text = model.title,
+			text = presentationVM.model.title,
 			fontSize = 14.sp,
 			fontWeight = FontWeight.SemiBold,
 			modifier = Modifier.padding(10.dp)
@@ -41,22 +42,24 @@ fun CarouselCard(model: Carousel, onClick: (Product) -> Unit) {
 				.fillMaxWidth()
 				.wrapContentWidth()
 		) {
-			items(model.productList.size) { index ->
-				CarouselProductCard(model = model.productList[index], onClick)
+			items(presentationVM.model.productList.size) { index ->
+				CarouselProductCard(model = presentationVM.model.productList[index]) {
+					presentationVM.openCarouselProduct(presentationVM.model.productList[index])
+				}
 			}
 		}
 	}
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CarouselProductCard(model: Product, onClick: (Product) -> Unit) {
-	Card(
-		shape = RoundedCornerShape(8.dp),
+	Card(shape = RoundedCornerShape(8.dp),
 		modifier = Modifier
 			.width(150.dp)
 			.wrapContentHeight()
-			.padding(10.dp)
-	) {
+			.padding(10.dp),
+		onClick = { onClick }) {
 		Column(
 			modifier = Modifier
 				.fillMaxWidth()
@@ -73,9 +76,7 @@ private fun CarouselProductCard(model: Product, onClick: (Product) -> Unit) {
 					.aspectRatio(2f)
 			)
 			Text(
-				text = model.shop.shopName,
-				fontSize = 14.sp,
-				fontWeight = FontWeight.SemiBold
+				text = model.shop.shopName, fontSize = 14.sp, fontWeight = FontWeight.SemiBold
 			)
 			Text(text = model.productName, fontSize = 14.sp)
 			Price(model)

@@ -29,9 +29,7 @@ fun CategoryScreen(
 		modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(10.dp)
 	) {
 		items(productList.size) { index ->
-			ProductCard(model = productList[index]) {
-				viewModel.openProduct(it)
-			}
+			ProductCard(presentationVM = productList[index])
 		}
 	}
 	

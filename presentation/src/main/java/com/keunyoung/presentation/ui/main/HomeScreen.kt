@@ -6,12 +6,12 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.keunyoung.domain.model.Banner
-import com.keunyoung.domain.model.BannerList
-import com.keunyoung.domain.model.Carousel
 import com.keunyoung.domain.model.ModelType
-import com.keunyoung.domain.model.Product
-import com.keunyoung.domain.model.Ranking
+import com.keunyoung.presentation.model.BannerListVM
+import com.keunyoung.presentation.model.BannerVM
+import com.keunyoung.presentation.model.CarouselVM
+import com.keunyoung.presentation.model.ProductVM
+import com.keunyoung.presentation.model.RankingVM
 import com.keunyoung.presentation.ui.component.BannerCard
 import com.keunyoung.presentation.ui.component.BannerListCard
 import com.keunyoung.presentation.ui.component.CarouselCard
@@ -26,32 +26,22 @@ fun MainHomeScreen(viewModel: MainViewModel) {
 	LazyVerticalGrid(columns = GridCells.Fixed(columnCount)) {
 		items(modelList.size, span = { index ->
 			val item = modelList[index]
-			val spanCount = getSpanCountByType(item.type, columnCount)
+			val spanCount = getSpanCountByType(item.model.type, columnCount)
 			GridItemSpan(spanCount)
 		}) { index ->
 			when (val item = modelList[index]) {
-				is Banner -> BannerCard(model = item){
-					viewModel.openBanner(it)
-				}
-				is BannerList -> BannerListCard(model = item){
-					viewModel.openBannerList(it)
-				}
-				is Product -> ProductCard(model = item) {
-					viewModel.openProduct(it)
-				}
-				is Carousel -> CarouselCard(model = item){
-					viewModel.openCarouselProduct(it)
-				}
-				is Ranking -> RankingCard(model = item) {
-					viewModel.openRankingProduct(it)
-				}
+				is BannerVM -> BannerCard(presentationVM = item)
+				is BannerListVM -> BannerListCard(presentationVM = item)
+				is ProductVM -> ProductCard(presentationVM = item)
+				is CarouselVM -> CarouselCard(presentationVM = item)
+				is RankingVM -> RankingCard(presentationVM = item)
 			}
 		}
 	}
 }
 
 private fun getSpanCountByType(type: ModelType, defaultColumnCount: Int): Int {
-	return when(type){
+	return when (type) {
 		ModelType.PRODUCT -> 1
 		ModelType.BANNER -> defaultColumnCount
 		ModelType.BANNER_LIST -> defaultColumnCount
