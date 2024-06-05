@@ -21,10 +21,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.google.gson.Gson
+import com.keunyoung.domain.model.Category
 import com.keunyoung.presentation.ui.category.CategoryScreen
 import com.keunyoung.presentation.ui.main.MainCategoryScreen
 import com.keunyoung.presentation.ui.main.MainHomeScreen
@@ -49,8 +53,9 @@ fun MainScreen() {
 	Scaffold(topBar = {
 		TopAppBar(viewModel)
 	}, bottomBar = {
-		if(NavigationItem.MainNav.isMainRoute(currentRoute))
-		BottomAppBar(navHostController, currentRoute)
+		if (NavigationItem.MainNav.isMainRoute(currentRoute)) BottomAppBar(
+			navHostController, currentRoute
+		)
 	}) { innerPadding ->
 		MainScreen(
 			navController = navHostController,
@@ -108,7 +113,15 @@ fun MainScreen(
 		composable(NavigationRouteName.MAIN_MY_PAGE) {
 			Text("MyPage")
 		}
-		composable(NavigationRouteName.CATEGORY) {
+		composable(
+			route = NavigationRouteName.CATEGORY + "/{category}",
+			arguments = listOf(navArgument("category") { type = NavType.StringType })
+		) { navBackStackEntry ->
+			val categoryString = navBackStackEntry.arguments?.getString("category")
+			val category = Gson().fromJson(categoryString, Category::class.java)
+			if (category != null) {
+				CategoryScreen(category = category)
+			}
 		}
 	}
 }
