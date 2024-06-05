@@ -17,6 +17,15 @@ sealed class NavigationItem(open val route: String) {
 		object Home : MainNav(MAIN_HOME, MAIN_HOME, Icons.Filled.Home)
 		object Category : MainNav(MAIN_CATEGORY, MAIN_CATEGORY, Icons.Filled.Star)
 		object MyPage : MainNav(MAIN_MY_PAGE, MAIN_MY_PAGE, Icons.Filled.AccountBox)
+		
+		companion object {
+			fun isMainRoute(route: String?): Boolean {
+				return when (route) {
+					MAIN_HOME, MAIN_CATEGORY, MAIN_MY_PAGE -> true
+					else -> false
+				}
+			}
+		}
 	}
 	
 	data class CategoryNav(

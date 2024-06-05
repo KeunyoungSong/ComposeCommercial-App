@@ -20,7 +20,7 @@ import com.keunyoung.presentation.ui.component.RankingCard
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
+fun MainHomeScreen(viewModel: MainViewModel) {
 	val modelList by viewModel.modelList.collectAsState(initial = listOf())
 	val columnCount by viewModel.columnCount.collectAsState()
 	LazyVerticalGrid(columns = GridCells.Fixed(columnCount)) {

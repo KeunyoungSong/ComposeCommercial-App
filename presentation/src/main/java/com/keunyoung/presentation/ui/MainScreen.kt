@@ -25,8 +25,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.keunyoung.presentation.ui.main.CategoryScreen
-import com.keunyoung.presentation.ui.main.MainScreen
+import com.keunyoung.presentation.ui.category.CategoryScreen
+import com.keunyoung.presentation.ui.main.MainCategoryScreen
+import com.keunyoung.presentation.ui.main.MainHomeScreen
 import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
@@ -42,11 +43,14 @@ fun GreetingPreview() {
 fun MainScreen() {
 	val viewModel = hiltViewModel<MainViewModel>()
 	val navHostController = rememberNavController()
+	val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+	val currentRoute = navBackStackEntry?.destination?.route
 	
 	Scaffold(topBar = {
 		TopAppBar(viewModel)
 	}, bottomBar = {
-		BottomAppBar(navHostController)
+		if(NavigationItem.MainNav.isMainRoute(currentRoute))
+		BottomAppBar(navHostController, currentRoute)
 	}) { innerPadding ->
 		MainScreen(
 			navController = navHostController,
@@ -57,7 +61,7 @@ fun MainScreen() {
 }
 
 @Composable
-fun BottomAppBar(navController: NavController) {
+fun BottomAppBar(navController: NavController, currentRoute: String?) {
 	val bottomNavigationItems = listOf(
 		NavigationItem.MainNav.Home,
 		NavigationItem.MainNav.Category,
@@ -68,9 +72,6 @@ fun BottomAppBar(navController: NavController) {
 		containerColor = MaterialTheme.colorScheme.primaryContainer,
 		contentColor = MaterialTheme.colorScheme.primary
 	) {
-		val navBackStackEntry by navController.currentBackStackEntryAsState()
-		val currentRoute = navBackStackEntry?.destination?.route
-		
 		bottomNavigationItems.forEach { navItem ->
 			NavigationBarItem(selected = currentRoute == navItem.route, icon = {
 				Icon(navItem.icon, navItem.route)
@@ -96,16 +97,18 @@ fun MainScreen(
 	NavHost(
 		modifier = Modifier.padding(innerPadding),
 		navController = navController,
-		startDestination = NavigationItem.MainNav.Home.route
+		startDestination = NavigationRouteName.MAIN_HOME
 	) {
-		composable(NavigationItem.MainNav.Home.route) {
-			MainScreen(viewModel = viewModel)
+		composable(NavigationRouteName.MAIN_HOME) {
+			MainHomeScreen(viewModel = viewModel)
 		}
-		composable(NavigationItem.MainNav.Category.route) {
-			CategoryScreen(viewModel = viewModel)
+		composable(NavigationRouteName.MAIN_CATEGORY) {
+			MainCategoryScreen(viewModel = viewModel)
 		}
-		composable(NavigationItem.MainNav.MyPage.route) {
+		composable(NavigationRouteName.MAIN_MY_PAGE) {
 			Text("MyPage")
+		}
+		composable(NavigationRouteName.CATEGORY) {
 		}
 	}
 }

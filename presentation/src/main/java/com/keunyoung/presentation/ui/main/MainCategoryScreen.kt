@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
 @Composable
-fun CategoryScreen(
+fun MainCategoryScreen(
 	viewModel: MainViewModel
 ) {
 	val categoryList by viewModel.categoryList.collectAsState(initial = listOf())
