@@ -2,7 +2,6 @@ package com.keunyoung.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.keunyoung.domain.model.Banner
 import com.keunyoung.domain.model.BannerList
@@ -11,6 +10,7 @@ import com.keunyoung.domain.model.Category
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.usecase.CategoryUseCase
 import com.keunyoung.domain.usecase.MainUseCase
+import com.keunyoung.presentation.delegate.ProductDelegate
 import com.keunyoung.presentation.ui.NavigationRouteName
 import com.keunyoung.presentation.utils.NavigationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
 	mainUseCase: MainUseCase, categoryUseCase: CategoryUseCase
-) : ViewModel() {
+) : ViewModel(), ProductDelegate {
 	private val _columnCount = MutableStateFlow(DEFAULT_COLUMN_COUNT)
 	val columnCount: StateFlow<Int> = _columnCount
 	
@@ -38,8 +38,8 @@ class MainViewModel @Inject constructor(
 		}
 	}
 	
-	fun openProduct(product: Product) {
-	
+	override fun openProduct(product: Product) {
+		// TODO
 	}
 	
 	fun openCarouselProduct(product: Product) {
@@ -60,9 +60,7 @@ class MainViewModel @Inject constructor(
 	
 	fun openCategory(navHostController: NavHostController, category: Category) {
 		NavigationUtils.navigate(
-			navHostController,
-			NavigationRouteName.CATEGORY,
-			category
+			navHostController, NavigationRouteName.CATEGORY, category
 		)
 	}
 	
