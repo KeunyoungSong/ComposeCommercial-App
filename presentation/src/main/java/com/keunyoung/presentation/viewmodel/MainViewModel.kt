@@ -2,6 +2,8 @@ package com.keunyoung.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.keunyoung.domain.model.Banner
 import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.BaseModel
@@ -9,6 +11,8 @@ import com.keunyoung.domain.model.Category
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.usecase.CategoryUseCase
 import com.keunyoung.domain.usecase.MainUseCase
+import com.keunyoung.presentation.ui.NavigationRouteName
+import com.keunyoung.presentation.ui.utils.NavigationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,6 +56,14 @@ class MainViewModel @Inject constructor(
 	
 	fun openRankingProduct(product: Product) {
 	
+	}
+	
+	fun openCategory(navHostController: NavHostController, category: Category) {
+		NavigationUtils.navigate(
+			navHostController,
+			NavigationRouteName.CATEGORY,
+			category
+		)
 	}
 	
 	companion object {

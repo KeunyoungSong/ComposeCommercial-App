@@ -108,7 +108,7 @@ fun MainScreen(
 			MainHomeScreen(viewModel = viewModel)
 		}
 		composable(NavigationRouteName.MAIN_CATEGORY) {
-			MainCategoryScreen(viewModel = viewModel)
+			MainCategoryScreen(viewModel = viewModel, navController)
 		}
 		composable(NavigationRouteName.MAIN_MY_PAGE) {
 			Text("MyPage")
