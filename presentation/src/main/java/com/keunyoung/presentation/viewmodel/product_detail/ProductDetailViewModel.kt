@@ -21,4 +21,8 @@ class ProductDetailViewModel @Inject constructor(
 			_product.emit(it)
 		}
 	}
+	
+	fun addCart(productId: String) {
+	
+	}
 }
