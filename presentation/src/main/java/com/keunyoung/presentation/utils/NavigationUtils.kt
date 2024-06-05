@@ -24,7 +24,7 @@ object NavigationUtils {
 					argument = String.format("/%s", Uri.parse(Gson().toJson(args)))
 				}
 				is Product -> {
-					argument = String.format("/%s", Uri.parse(Gson().toJson(args)))
+					argument = String.format("/%s", args.productId)
 				}
 			}
 		}

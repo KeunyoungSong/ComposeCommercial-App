@@ -127,9 +127,8 @@ fun MainScreen(
 			arguments = listOf(navArgument("product") { type = NavType.StringType })
 		) {
 			val productString = it.arguments?.getString("product")
-			val product = Gson().fromJson(productString, Product::class.java)
-			if (product != null) {
-				ProductDetailScreen(product)
+			if (productString != null) {
+				ProductDetailScreen(productString)
 			}
 		}
 	}

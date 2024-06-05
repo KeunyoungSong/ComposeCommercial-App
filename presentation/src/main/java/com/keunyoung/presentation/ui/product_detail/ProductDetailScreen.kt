@@ -5,6 +5,6 @@ import androidx.compose.runtime.Composable
 import com.keunyoung.domain.model.Product
 
 @Composable
-fun ProductDetailScreen(product: Product) {
-	Text("Product Detail Screen: ${product.productName}")
+fun ProductDetailScreen(productId: String) {
+	Text("Product Detail Screen: $productId")
 }
