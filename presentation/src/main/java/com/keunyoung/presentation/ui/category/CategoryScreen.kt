@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.keunyoung.domain.model.Category
 import com.keunyoung.presentation.ui.component.ProductCard
 import com.keunyoung.presentation.viewmodel.category.CategoryViewModel
@@ -17,6 +18,7 @@ import com.keunyoung.presentation.viewmodel.category.CategoryViewModel
 @Composable
 fun CategoryScreen(
 	category: Category,
+	navHostController: NavHostController,
 	viewModel: CategoryViewModel = hiltViewModel(),
 ) {
 	val productList by viewModel.productList.collectAsState()
@@ -29,7 +31,7 @@ fun CategoryScreen(
 		modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(10.dp)
 	) {
 		items(productList.size) { index ->
-			ProductCard(presentationVM = productList[index])
+			ProductCard(navHostController = navHostController, presentationVM = productList[index])
 		}
 	}
 	

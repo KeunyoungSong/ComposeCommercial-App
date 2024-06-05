@@ -49,8 +49,10 @@ class MainViewModel @Inject constructor(
 		}
 	}
 	
-	override fun openProduct(product: Product) {
-		// TODO
+	override fun openProduct(navHostController: NavHostController, product: Product) {
+		NavigationUtils.navigate(
+			controller = navHostController, routeName = NavigationRouteName.PRODUCT_DETAIL, args = product
+		)
 	}
 	
 	override fun openBanner(bannerId: String) {
@@ -59,7 +61,7 @@ class MainViewModel @Inject constructor(
 	
 	override fun openCategory(navHostController: NavHostController, category: Category) {
 		NavigationUtils.navigate(
-			navHostController, NavigationRouteName.CATEGORY, category
+			controller = navHostController, routeName = NavigationRouteName.CATEGORY, args = category
 		)
 	}
 	

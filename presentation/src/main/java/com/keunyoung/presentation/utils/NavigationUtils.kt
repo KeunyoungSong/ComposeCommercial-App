@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Parcelable
 import androidx.navigation.NavHostController
 import com.google.gson.Gson
+import com.keunyoung.domain.model.Product
 
 object NavigationUtils {
 	
@@ -20,6 +21,9 @@ object NavigationUtils {
 		if (args != null) {
 			when (args) {
 				is Parcelable -> {
+					argument = String.format("/%s", Uri.parse(Gson().toJson(args)))
+				}
+				is Product -> {
 					argument = String.format("/%s", Uri.parse(Gson().toJson(args)))
 				}
 			}

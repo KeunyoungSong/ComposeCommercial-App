@@ -29,9 +29,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.gson.Gson
 import com.keunyoung.domain.model.Category
+import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.ui.category.CategoryScreen
 import com.keunyoung.presentation.ui.main.MainCategoryScreen
 import com.keunyoung.presentation.ui.main.MainHomeScreen
+import com.keunyoung.presentation.ui.product_detail.ProductDetailScreen
 import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
@@ -58,9 +60,7 @@ fun MainScreen() {
 		)
 	}) { innerPadding ->
 		MainScreen(
-			navController = navHostController,
-			innerPadding = innerPadding,
-			viewModel = viewModel
+			navController = navHostController, innerPadding = innerPadding, viewModel = viewModel
 		)
 	}
 }
@@ -95,9 +95,7 @@ fun BottomAppBar(navController: NavController, currentRoute: String?) {
 
 @Composable
 fun MainScreen(
-	navController: NavHostController,
-	innerPadding: PaddingValues,
-	viewModel: MainViewModel
+	navController: NavHostController, innerPadding: PaddingValues, viewModel: MainViewModel
 ) {
 	NavHost(
 		modifier = Modifier.padding(innerPadding),
@@ -105,7 +103,7 @@ fun MainScreen(
 		startDestination = NavigationRouteName.MAIN_HOME
 	) {
 		composable(NavigationRouteName.MAIN_HOME) {
-			MainHomeScreen(viewModel = viewModel)
+			MainHomeScreen(navHostController = navController, viewModel = viewModel)
 		}
 		composable(NavigationRouteName.MAIN_CATEGORY) {
 			MainCategoryScreen(viewModel = viewModel, navController)
@@ -120,7 +118,18 @@ fun MainScreen(
 			val categoryString = navBackStackEntry.arguments?.getString("category")
 			val category = Gson().fromJson(categoryString, Category::class.java)
 			if (category != null) {
-				CategoryScreen(category = category)
+				CategoryScreen(navHostController = navController, category = category)
+			}
+		}
+		
+		composable(
+			NavigationRouteName.PRODUCT_DETAIL + "/{product}",
+			arguments = listOf(navArgument("product") { type = NavType.StringType })
+		) {
+			val productString = it.arguments?.getString("product")
+			val product = Gson().fromJson(productString, Product::class.java)
+			if (product != null) {
+				ProductDetailScreen(product)
 			}
 		}
 	}

@@ -25,6 +25,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.keunyoung.domain.model.Category
 import com.keunyoung.domain.model.Price
 import com.keunyoung.domain.model.Product
@@ -32,20 +34,19 @@ import com.keunyoung.domain.model.SalesStatus
 import com.keunyoung.domain.model.Shop
 import com.keunyoung.presentation.R
 import com.keunyoung.presentation.delegate.ProductDelegate
-import com.keunyoung.presentation.model.PresentationVM
 import com.keunyoung.presentation.model.ProductVM
 import com.keunyoung.presentation.ui.theme.Purple80
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductCard(presentationVM: ProductVM) {
+fun ProductCard(navHostController: NavHostController, presentationVM: ProductVM) {
 	Card(shape = RoundedCornerShape(8.dp),
 		modifier = Modifier
 			.fillMaxWidth()
 			.padding(10.dp)
 			.height(intrinsicSize = IntrinsicSize.Max)
 			.shadow(10.dp),
-		onClick = { presentationVM.openProduct(presentationVM.model) }) {
+		onClick = { presentationVM.openProduct(navHostController, presentationVM.model) }) {
 		Column(
 			modifier = Modifier
 				.fillMaxWidth()
@@ -106,71 +107,56 @@ fun Price(product: Product) {
 @Preview
 @Composable
 private fun PreviewProductCard() {
-	ProductCard(
-		presentationVM = ProductVM(
-			model =  Product(
-				productId = "1",
-				productName = "상품 이름",
-				imageUrl = "",
-				price = Price(30000, 30000, SalesStatus.ON_SALE),
-				category = Category.Top,
-				shop = Shop("1", "샵 이름", ""),
-				isNew = false,
-				isFreeShipping = false
-			),
-			object : ProductDelegate {
-				override fun openProduct(product: Product) {
-				
-				}
-			}
-		)
-	)
+	ProductCard(navHostController = rememberNavController(), presentationVM = ProductVM(model = Product(
+		productId = "1",
+		productName = "상품 이름",
+		imageUrl = "",
+		price = Price(30000, 30000, SalesStatus.ON_SALE),
+		category = Category.Top,
+		shop = Shop("1", "샵 이름", ""),
+		isNew = false,
+		isFreeShipping = false
+	), object : ProductDelegate {
+		override fun openProduct(navHostController: NavHostController, product: Product) {
+			TODO("Not yet implemented")
+		}
+	}))
 }
 
 @Preview
 @Composable
 private fun PreviewProductCardDiscount() {
-	ProductCard(
-		presentationVM = ProductVM(
-			model =  Product(
-				productId = "1",
-				productName = "상품 이름",
-				imageUrl = "",
-				price = Price(30000, 20000, SalesStatus.ON_DISCOUNT),
-				category = Category.Top,
-				shop = Shop("1", "샵 이름", ""),
-				isNew = false,
-				isFreeShipping = false
-			),
-			object : ProductDelegate {
-				override fun openProduct(product: Product) {
-				
-				}
-			}
-		)
-	)
+	ProductCard(navHostController = rememberNavController(), presentationVM = ProductVM(model = Product(
+		productId = "1",
+		productName = "상품 이름",
+		imageUrl = "",
+		price = Price(30000, 20000, SalesStatus.ON_DISCOUNT),
+		category = Category.Top,
+		shop = Shop("1", "샵 이름", ""),
+		isNew = false,
+		isFreeShipping = false
+	), object : ProductDelegate {
+		override fun openProduct(navHostController: NavHostController, product: Product) {
+			TODO("Not yet implemented")
+		}
+	}))
 }
 
 @Preview
 @Composable
 private fun PreviewProductCardSoldOut() {
-	ProductCard(
-		presentationVM = ProductVM(
-			model =  Product(
-				productId = "1",
-				productName = "상품 이름",
-				imageUrl = "",
-				price = Price(30000, 20000, SalesStatus.SOLD_OUT),
-				category = Category.Top,
-				shop = Shop("1", "샵 이름", ""),
-				isNew = false,
-				isFreeShipping = false
-			),
-			object : ProductDelegate {
-				override fun openProduct(product: Product) {
-				
-				}
-			}
-		)
-	)
+	ProductCard(navHostController = rememberNavController(), presentationVM = ProductVM(model = Product(
+		productId = "1",
+		productName = "상품 이름",
+		imageUrl = "",
+		price = Price(30000, 20000, SalesStatus.SOLD_OUT),
+		category = Category.Top,
+		shop = Shop("1", "샵 이름", ""),
+		isNew = false,
+		isFreeShipping = false
+	), object : ProductDelegate {
+		override fun openProduct(navHostController: NavHostController, product: Product) {
+			TODO("Not yet implemented")
+		}
+	}))
 }
