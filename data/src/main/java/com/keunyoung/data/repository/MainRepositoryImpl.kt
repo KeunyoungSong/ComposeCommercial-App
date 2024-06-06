@@ -9,5 +9,5 @@ import javax.inject.Inject
 class MainRepositoryImpl @Inject constructor(
 	private val dataSource: ProductDataSource
 ) : MainRepository {
-	override fun getModelList(): Flow<List<BaseModel>> = dataSource.getProducts()
+	override fun getModelList(): Flow<List<BaseModel>> = dataSource.getHomeComponents()
 }

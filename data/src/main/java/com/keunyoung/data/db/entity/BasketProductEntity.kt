@@ -2,7 +2,6 @@ package com.keunyoung.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.keunyoung.data.db.converter.BasketConverter
 import com.keunyoung.domain.model.Category

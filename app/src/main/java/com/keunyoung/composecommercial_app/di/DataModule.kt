@@ -1,11 +1,13 @@
-package com.keunyoung.composecommercial_app
+package com.keunyoung.composecommercial_app.di
 
 import com.keunyoung.data.repository.CategoryRepositoryImpl
 import com.keunyoung.data.repository.MainRepositoryImpl
 import com.keunyoung.data.repository.ProductDetailRepositoryImpl
+import com.keunyoung.data.repository.SearchRepositoryImpl
 import com.keunyoung.domain.repository.CategoryRepository
 import com.keunyoung.domain.repository.MainRepository
 import com.keunyoung.domain.repository.ProductDetailRepository
+import com.keunyoung.domain.repository.SearchRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -27,5 +29,9 @@ interface DataModule {
 	@Binds
 	@Singleton
 	fun bindProductDetailRepository(productDetailRepositoryImpl: ProductDetailRepositoryImpl): ProductDetailRepository
+	
+	@Binds
+	@Singleton
+	fun bindSearchRepository(searchRepositoryImpl: SearchRepositoryImpl): SearchRepository
 	
 }

@@ -1,4 +1,4 @@
-package com.keunyoung.composecommercial_app
+package com.keunyoung.composecommercial_app.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
