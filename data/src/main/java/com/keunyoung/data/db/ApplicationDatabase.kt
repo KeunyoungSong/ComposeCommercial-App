@@ -9,9 +9,10 @@ import com.keunyoung.data.db.dao.SearchDao
 import com.keunyoung.data.db.entity.BasketProductEntity
 import com.keunyoung.data.db.entity.LikeProductEntity
 import com.keunyoung.data.db.entity.PurchaseProductEntity
+import com.keunyoung.data.db.entity.SearchKeywordEntity
 
 @Database(
-	entities = [PurchaseProductEntity::class, LikeProductEntity::class, BasketProductEntity::class],
+	entities = [PurchaseProductEntity::class, LikeProductEntity::class, BasketProductEntity::class, SearchKeywordEntity::class],
 	version = 1
 )
 abstract class ApplicationDatabase : RoomDatabase() {

@@ -1,6 +1,8 @@
 package com.keunyoung.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.model.SearchKeyword
@@ -13,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,9 +26,13 @@ class SearchViewModel @Inject constructor(
 	val searchResult: StateFlow<List<ProductVM>> = _searchResult
 	val searchKeywords = useCase.getSearchKeywords()
 	
-	suspend fun search(keyword: String) {
-		useCase.search(SearchKeyword(keyword = keyword)).collectLatest {
-			_searchResult.emit(it.map(::convertToProductVM))
+	fun search(keyword: String) {
+		Log.d("result", "search called: $keyword")
+		viewModelScope.launch {
+			useCase.search(SearchKeyword(keyword = keyword)).collectLatest {
+				Log.d("result", "search: $it")
+				_searchResult.emit(it.map(::convertToProductVM))
+			}
 		}
 	}
 	

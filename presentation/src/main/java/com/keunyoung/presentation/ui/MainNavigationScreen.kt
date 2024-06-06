@@ -29,11 +29,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.gson.Gson
 import com.keunyoung.domain.model.Category
-import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.ui.category.CategoryScreen
 import com.keunyoung.presentation.ui.main.MainCategoryScreen
 import com.keunyoung.presentation.ui.main.MainHomeScreen
 import com.keunyoung.presentation.ui.product_detail.ProductDetailScreen
+import com.keunyoung.presentation.ui.search.SearchScreen
 import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
@@ -41,25 +41,27 @@ import com.keunyoung.presentation.viewmodel.MainViewModel
 @Composable
 fun GreetingPreview() {
 	ComposeCommercialAppTheme {
-		MainScreen()
+		MainNavigationScreen()
 	}
 }
 
 @Composable
-fun MainScreen() {
+fun MainNavigationScreen() {
 	val viewModel = hiltViewModel<MainViewModel>()
 	val navHostController = rememberNavController()
 	val navBackStackEntry by navHostController.currentBackStackEntryAsState()
 	val currentRoute = navBackStackEntry?.destination?.route
 	
 	Scaffold(topBar = {
-		TopAppBar(viewModel)
+		if (NavigationItem.MainNav.isMainRoute(currentRoute)) {
+			MainHeader(viewModel, navHostController)
+		}
 	}, bottomBar = {
 		if (NavigationItem.MainNav.isMainRoute(currentRoute)) BottomAppBar(
 			navHostController, currentRoute
 		)
 	}) { innerPadding ->
-		MainScreen(
+		MainNavigationScreen(
 			navController = navHostController, innerPadding = innerPadding, viewModel = viewModel
 		)
 	}
@@ -94,7 +96,7 @@ fun BottomAppBar(navController: NavController, currentRoute: String?) {
 }
 
 @Composable
-fun MainScreen(
+fun MainNavigationScreen(
 	navController: NavHostController, innerPadding: PaddingValues, viewModel: MainViewModel
 ) {
 	NavHost(
@@ -131,14 +133,17 @@ fun MainScreen(
 				ProductDetailScreen(productString)
 			}
 		}
+		composable(NavigationRouteName.SEARCH) {
+			SearchScreen(navHostController = navController)
+		}
 	}
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(viewModel: MainViewModel) {
+fun MainHeader(viewModel: MainViewModel, navHostController: NavHostController) {
 	TopAppBar(title = { Text(text = "My App") }, actions = {
-		IconButton(onClick = { viewModel.openSearchForm() }) {
+		IconButton(onClick = { viewModel.openSearchForm(navHostController) }) {
 			Icon(Icons.Filled.Search, "Search Icon")
 		}
 	})

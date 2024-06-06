@@ -33,6 +33,7 @@ sealed class NavigationItem(open val route: String) {
 	
 	data class CategoryNav(val category: Category) : NavigationItem(MAIN_MY_PAGE)
 	data class ProductDetailNav(val product: Product) : NavigationItem(PRODUCT_DETAIL)
+	object SearchNav : NavigationItem(PRODUCT_DETAIL)
 }
 
 object NavigationRouteName {
@@ -41,6 +42,7 @@ object NavigationRouteName {
 	const val MAIN_MY_PAGE = "main_my_page"
 	const val CATEGORY = "category"
 	const val PRODUCT_DETAIL = "product_detail"
+	const val SEARCH = "search"
 	
 }
 
