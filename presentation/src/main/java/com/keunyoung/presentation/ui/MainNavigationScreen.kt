@@ -16,7 +16,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -27,26 +26,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.gson.Gson
 import com.keunyoung.domain.model.Category
 import com.keunyoung.presentation.ui.category.CategoryScreen
 import com.keunyoung.presentation.ui.main.MainCategoryScreen
 import com.keunyoung.presentation.ui.main.MainHomeScreen
+import com.keunyoung.presentation.ui.main.MyPageScreen
 import com.keunyoung.presentation.ui.product_detail.ProductDetailScreen
 import com.keunyoung.presentation.ui.search.SearchScreen
-import com.keunyoung.presentation.ui.theme.ComposeCommercialAppTheme
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-	ComposeCommercialAppTheme {
-		MainNavigationScreen()
-	}
-}
-
-@Composable
-fun MainNavigationScreen() {
+fun MainNavigationScreen(googleSignInClient: GoogleSignInClient) {
 	val viewModel = hiltViewModel<MainViewModel>()
 	val navHostController = rememberNavController()
 	val navBackStackEntry by navHostController.currentBackStackEntryAsState()
@@ -62,7 +54,10 @@ fun MainNavigationScreen() {
 		)
 	}) { innerPadding ->
 		MainNavigationScreen(
-			navController = navHostController, innerPadding = innerPadding, viewModel = viewModel
+			navController = navHostController,
+			innerPadding = innerPadding,
+			viewModel = viewModel,
+			googleSignInClient = googleSignInClient
 		)
 	}
 }
@@ -97,7 +92,7 @@ fun BottomAppBar(navController: NavController, currentRoute: String?) {
 
 @Composable
 fun MainNavigationScreen(
-	navController: NavHostController, innerPadding: PaddingValues, viewModel: MainViewModel
+	navController: NavHostController, innerPadding: PaddingValues, viewModel: MainViewModel, googleSignInClient: GoogleSignInClient
 ) {
 	NavHost(
 		modifier = Modifier.padding(innerPadding),
@@ -111,7 +106,7 @@ fun MainNavigationScreen(
 			MainCategoryScreen(viewModel = viewModel, navController)
 		}
 		composable(NavigationRouteName.MAIN_MY_PAGE) {
-			Text("MyPage")
+			MyPageScreen(viewModel = viewModel, googleSignInClient = googleSignInClient)
 		}
 		composable(
 			route = NavigationRouteName.CATEGORY + "/{category}",
