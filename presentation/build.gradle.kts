@@ -53,6 +53,10 @@ dependencies {
 	implementation("com.google.accompanist:accompanist-pager:0.23.1")
 	implementation("com.google.accompanist:accompanist-pager-indicators:0.23.1")
 	implementation("com.google.code.gson:gson:2.11.0")
+	implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+	implementation("com.google.firebase:firebase-analytics-ktx:22.0.1")
+	implementation("com.google.firebase:firebase-auth-ktx")
+	implementation("com.google.android.gms:play-services-auth:21.2.0")
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)
