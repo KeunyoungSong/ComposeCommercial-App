@@ -3,6 +3,7 @@ package com.keunyoung.data.datasource
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.keunyoung.domain.model.AccountInfo
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -49,4 +50,13 @@ class PreferenceDatasource @Inject constructor(
 		return prefs.getInt(key, defValue)
 	}
 	
+	fun putAccountInfo(accountInfo: AccountInfo){
+		putString(ACCOUNT_INFO, gson.toJson(accountInfo))
+	}
+	fun getAccountInfo() : AccountInfo? {
+		return gson.fromJson(getString(ACCOUNT_INFO), AccountInfo::class.java)
+	}
+	fun removeAccountInfo(){
+		putString(ACCOUNT_INFO, null)
+	}
 }
