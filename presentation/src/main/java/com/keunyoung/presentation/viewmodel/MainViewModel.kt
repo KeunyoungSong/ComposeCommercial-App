@@ -3,6 +3,7 @@ package com.keunyoung.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import com.keunyoung.domain.model.AccountInfo
 import com.keunyoung.domain.model.Banner
 import com.keunyoung.domain.model.BannerList
 import com.keunyoung.domain.model.BaseModel
@@ -10,6 +11,7 @@ import com.keunyoung.domain.model.Carousel
 import com.keunyoung.domain.model.Category
 import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.model.Ranking
+import com.keunyoung.domain.usecase.AccountUseCase
 import com.keunyoung.domain.usecase.CategoryUseCase
 import com.keunyoung.domain.usecase.MainUseCase
 import com.keunyoung.presentation.delegate.BannerDelegate
@@ -33,16 +35,28 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-	mainUseCase: MainUseCase, categoryUseCase: CategoryUseCase
+	mainUseCase: MainUseCase, categoryUseCase: CategoryUseCase, private val accountUseCase: AccountUseCase
 ) : ViewModel(), ProductDelegate, BannerDelegate, CategoryDelegate {
 	private val _columnCount = MutableStateFlow(DEFAULT_COLUMN_COUNT)
 	val columnCount: StateFlow<Int> = _columnCount
-	
 	val modelList = mainUseCase.getModelList().map(::convertToPresentationVM)
 	val categoryList: Flow<List<Category>> = categoryUseCase.getCategoryList()
+	val accountInfo = accountUseCase.getAccountInfo()
 	
 	fun openSearchForm(navHostController: NavHostController) {
 		NavigationUtils.navigate(navHostController, NavigationRouteName.SEARCH)
+	}
+	
+	fun signInGoogle(accountInfo: AccountInfo){
+		viewModelScope.launch {
+			accountUseCase.signInGoogle(accountInfo)
+		}
+	}
+	
+	fun signOutGoogle(){
+		viewModelScope.launch {
+			accountUseCase.signOutGoogle()
+		}
 	}
 	
 	fun updateColumnCount(count: Int) {
