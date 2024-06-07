@@ -58,10 +58,13 @@ dependencies {
 	implementation(libs.hilt.android)
 	implementation(libs.androidx.room.ktx)
 	kapt(libs.hilt.compiler)
+	// 구글 로그인을 위한 의존성
 	implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
 	implementation("com.google.firebase:firebase-analytics:22.0.1")
 	implementation("com.google.firebase:firebase-auth")
 	implementation("com.google.android.gms:play-services-auth:21.2.0")
+	// 카카오 로그인을 위한 의존성
+	implementation ("com.kakao.sdk:v2-user:2.20.1")
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)
