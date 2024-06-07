@@ -10,11 +10,11 @@ sealed class SearchFilter(open val type: Type) {
 	
 	abstract fun clear()
 	
-	data class PriceFilter(val priceRange: Pair<Int, Int>, var selectedRange: Pair<Int, Int>? = null) :
+	data class PriceFilter(val priceRange: Pair<Float, Float>, var selectedRange: Pair<Float, Float>? = null) :
 		SearchFilter(Type.PRICE) {
 		
 		override fun isAvailableProduct(product: Product): Boolean {
-			return product.price.finalPrice in (selectedRange?.first ?: 0)..(selectedRange?.second ?: 0)
+			return selectedRange == null || product.price.finalPrice.toFloat() in (selectedRange?.first ?: 0f).. (selectedRange?.second ?: 0f)
 		}
 		
 		override fun clear() {
@@ -22,11 +22,11 @@ sealed class SearchFilter(open val type: Type) {
 		}
 	}
 	
-	data class CategoryFilter(val categories: List<Category>, var selectedCategory: Category? = null) :
+	data class CategoryFilter(val categoryList: List<Category>, var selectedCategory: Category? = null) :
 		SearchFilter(Type.CATEGORY) {
 		
 		override fun isAvailableProduct(product: Product): Boolean {
-			return product.category.categoryId == selectedCategory?.categoryId
+			return selectedCategory == null || product.category.categoryId == selectedCategory?.categoryId
 		}
 		
 		override fun clear() {

@@ -1,5 +1,6 @@
 package com.keunyoung.data.repository
 
+import android.util.Log
 import com.keunyoung.data.datasource.ProductDataSource
 import com.keunyoung.data.db.dao.SearchDao
 import com.keunyoung.data.db.entity.SearchKeywordEntity
