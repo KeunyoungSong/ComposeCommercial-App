@@ -47,15 +47,15 @@ class MainViewModel @Inject constructor(
 		NavigationUtils.navigate(navHostController, NavigationRouteName.SEARCH)
 	}
 	
-	fun signInGoogle(accountInfo: AccountInfo){
+	fun signIn(accountInfo: AccountInfo){
 		viewModelScope.launch {
 			accountUseCase.signInGoogle(accountInfo)
 		}
 	}
 	
-	fun signOutGoogle(){
+	fun signOut(){
 		viewModelScope.launch {
-			accountUseCase.signOutGoogle()
+			accountUseCase.signOut()
 		}
 	}
 	

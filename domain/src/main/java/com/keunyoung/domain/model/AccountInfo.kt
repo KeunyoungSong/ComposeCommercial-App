@@ -5,6 +5,7 @@ data class AccountInfo(
 ) {
 	enum class Type {
 		// 다른 로그인 방식 확장 지원
-		GOOGLE
+		GOOGLE,
+		KAKAO
 	}
 }
