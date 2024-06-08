@@ -18,7 +18,7 @@ class MainRepositoryImpl @Inject constructor(
 ) : MainRepository {
 	
 	override fun getModelList(): Flow<List<BaseModel>> {
-		return dataSource.getHomeComponents().combine(likeDao.getAll()) { homeComponentList, likeList ->
+		return dataSource.getHomeComponentList().combine(likeDao.getAll()) { homeComponentList, likeList ->
 			homeComponentList.map { baseModel -> mappingLike(baseModel, likeList.map { it.productId }) }
 		}
 	}

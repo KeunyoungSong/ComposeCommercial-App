@@ -14,9 +14,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.keunyoung.presentation.R
 import com.keunyoung.presentation.ui.theme.Purple80
+import com.keunyoung.presentation.utils.NumberUtils
 import com.keunyoung.presentation.viewmodel.product_detail.ProductDetailViewModel
 
 @Composable
@@ -85,18 +89,25 @@ fun ProductDetailScreen(productId: String, viewModel: ProductDetailViewModel = h
 				.fillMaxWidth()
 				.padding(16.dp), verticalAlignment = Alignment.CenterVertically
 		) {
-			Text(text = "${product?.price?.finalPrice}", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+			Text(
+				text = "${NumberUtils.numberFormatPrice(product?.price?.finalPrice)} 원",
+				fontSize = 24.sp,
+				fontWeight = FontWeight.Bold
+			)
 			Spacer(modifier = Modifier.width(12.dp))
 			Button(
-				onClick = { viewModel.addCart(productId = productId) },
+				onClick = { viewModel.addBasket(product) },
 				colors = ButtonDefaults.buttonColors(containerColor = Purple80),
 				shape = RoundedCornerShape(12.dp)
 			) {
-				Text(
-					text = "카트에 담기", modifier = Modifier
-						.fillMaxWidth()
-						.padding(5.dp), fontSize = 16.sp
-				)
+				Row(verticalAlignment = Alignment.CenterVertically) {
+					Icon(imageVector = Icons.Filled.ShoppingCart, contentDescription = null)
+					Text(
+						text = "장바구니 담기", modifier = Modifier
+							.fillMaxWidth()
+							.padding(5.dp), fontSize = 16.sp
+					)
+				}
 			}
 		}
 	}
