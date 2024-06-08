@@ -67,6 +67,7 @@ fun BottomAppBar(navController: NavController, currentRoute: String?) {
 	val bottomNavigationItems = listOf(
 		NavigationItem.MainNav.Home,
 		NavigationItem.MainNav.Category,
+		NavigationItem.MainNav.Like,
 		NavigationItem.MainNav.MyPage,
 	)
 	
@@ -107,6 +108,9 @@ fun MainNavigationScreen(
 		}
 		composable(NavigationRouteName.MAIN_MY_PAGE) {
 			MyPageScreen(viewModel = viewModel, googleSignInClient = googleSignInClient)
+		}
+		composable(NavigationRouteName.MAIN_LIKE){
+			// TODO 스크린 만들기
 		}
 		composable(
 			route = NavigationRouteName.CATEGORY + "/{category}",
