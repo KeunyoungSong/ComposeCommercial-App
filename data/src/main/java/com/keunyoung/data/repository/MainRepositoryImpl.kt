@@ -27,7 +27,7 @@ class MainRepositoryImpl @Inject constructor(
 		if (product.isLike) {
 			likeDao.delete(product.productId)
 		} else {
-			likeDao.upsert(product.toLikeProductEntity())
+			likeDao.upsert(product.toLikeProductEntity().copy(isLike = true))
 		}
 	}
 	

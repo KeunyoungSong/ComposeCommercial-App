@@ -30,6 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.gson.Gson
 import com.keunyoung.domain.model.Category
 import com.keunyoung.presentation.ui.category.CategoryScreen
+import com.keunyoung.presentation.ui.main.LikeScreen
 import com.keunyoung.presentation.ui.main.MainCategoryScreen
 import com.keunyoung.presentation.ui.main.MainHomeScreen
 import com.keunyoung.presentation.ui.main.MyPageScreen
@@ -110,7 +111,7 @@ fun MainNavigationScreen(
 			MyPageScreen(viewModel = viewModel, googleSignInClient = googleSignInClient)
 		}
 		composable(NavigationRouteName.MAIN_LIKE){
-			// TODO 스크린 만들기
+			LikeScreen(navHostController = navController, viewModel = viewModel)
 		}
 		composable(
 			route = NavigationRouteName.CATEGORY + "/{category}",

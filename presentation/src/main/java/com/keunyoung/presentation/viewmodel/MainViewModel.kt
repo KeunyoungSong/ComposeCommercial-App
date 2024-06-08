@@ -13,6 +13,7 @@ import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.model.Ranking
 import com.keunyoung.domain.usecase.AccountUseCase
 import com.keunyoung.domain.usecase.CategoryUseCase
+import com.keunyoung.domain.usecase.LikeUseCase
 import com.keunyoung.domain.usecase.MainUseCase
 import com.keunyoung.presentation.delegate.BannerDelegate
 import com.keunyoung.presentation.delegate.CategoryDelegate
@@ -38,12 +39,14 @@ class MainViewModel @Inject constructor(
 	private val mainUseCase: MainUseCase,
 	categoryUseCase: CategoryUseCase,
 	private val accountUseCase: AccountUseCase,
+	likeUseCase: LikeUseCase
 ) : ViewModel(), ProductDelegate, BannerDelegate, CategoryDelegate {
 	private val _columnCount = MutableStateFlow(DEFAULT_COLUMN_COUNT)
 	val columnCount: StateFlow<Int> = _columnCount
 	val modelList = mainUseCase.getModelList().map(::convertToPresentationVM)
 	val categoryList: Flow<List<Category>> = categoryUseCase.getCategoryList()
 	val accountInfo = accountUseCase.getAccountInfo()
+	val likeProductList = likeUseCase.getLikeProducts().map(::convertToPresentationVM)
 	
 	fun openSearchForm(navHostController: NavHostController) {
 		NavigationUtils.navigate(navHostController, NavigationRouteName.SEARCH)
