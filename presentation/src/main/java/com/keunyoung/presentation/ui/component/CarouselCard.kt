@@ -2,6 +2,7 @@ package com.keunyoung.presentation.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,8 +13,13 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,8 +50,13 @@ fun CarouselCard(navHostController: NavHostController, presentationVM: CarouselV
 				.wrapContentWidth()
 		) {
 			items(presentationVM.model.productList.size) { index ->
-				CarouselProductCard(model = presentationVM.model.productList[index]) {
-					presentationVM.openCarouselProduct(navHostController = navHostController,presentationVM.model.productList[index])
+				CarouselProductCard(
+					model = presentationVM.model.productList[index], presentationVM = presentationVM
+				) {
+					presentationVM.openCarouselProduct(
+						navHostController = navHostController,
+						presentationVM.model.productList[index]
+					)
 				}
 			}
 		}
@@ -54,33 +65,44 @@ fun CarouselCard(navHostController: NavHostController, presentationVM: CarouselV
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun CarouselProductCard(model: Product, onClick: (Product) -> Unit) {
+private fun CarouselProductCard(model: Product, presentationVM: CarouselVM, onClick: (Product) -> Unit) {
 	Card(shape = RoundedCornerShape(8.dp),
 		modifier = Modifier
 			.width(150.dp)
 			.wrapContentHeight()
 			.padding(10.dp),
-		onClick = { onClick }) {
-		Column(
-			modifier = Modifier
-				.fillMaxWidth()
-				.padding(10.dp),
-			verticalArrangement = Arrangement.Center,
-			horizontalAlignment = Alignment.Start
-		) {
-			Image(
-				painter = painterResource(id = R.drawable.product_image),
-				contentDescription = null,
-				contentScale = ContentScale.Crop,
+		onClick = { onClick(model) }) {
+		Box(modifier = Modifier.fillMaxWidth()) {
+			IconButton(
+				onClick = { presentationVM.likeProduct(model) },
+				modifier = Modifier.align(Alignment.BottomEnd)
+			) {
+				Icon(
+					imageVector = if (model.isLike) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+					contentDescription = null
+				)
+			}
+			Column(
 				modifier = Modifier
 					.fillMaxWidth()
-					.aspectRatio(2f)
-			)
-			Text(
-				text = model.shop.shopName, fontSize = 14.sp, fontWeight = FontWeight.SemiBold
-			)
-			Text(text = model.productName, fontSize = 14.sp)
-			Price(model)
+					.padding(10.dp),
+				verticalArrangement = Arrangement.Center,
+				horizontalAlignment = Alignment.Start
+			) {
+				Image(
+					painter = painterResource(id = R.drawable.product_image),
+					contentDescription = null,
+					contentScale = ContentScale.Crop,
+					modifier = Modifier
+						.fillMaxWidth()
+						.aspectRatio(2f)
+				)
+				Text(
+					text = model.shop.shopName, fontSize = 14.sp, fontWeight = FontWeight.SemiBold
+				)
+				Text(text = model.productName, fontSize = 14.sp)
+				Price(model)
+			}
 		}
 	}
 }

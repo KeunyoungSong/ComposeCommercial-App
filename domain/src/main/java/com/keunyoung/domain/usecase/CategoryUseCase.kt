@@ -6,13 +6,17 @@ import com.keunyoung.domain.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class CategoryUseCase @Inject constructor(private val repository: CategoryRepository) {
+class CategoryUseCase @Inject constructor(private val categoryRepository: CategoryRepository) {
 	
 	fun getCategoryList(): Flow<List<Category>> {
-		return repository.getCategoryList()
+		return categoryRepository.getCategoryList()
 	}
 	
 	fun getProductsByCategory(category: Category): Flow<List<Product>> {
-		return repository.getProductByCategory(category)
+		return categoryRepository.getProductByCategory(category)
+	}
+	
+	suspend fun likeProduct(product: Product){
+		categoryRepository.likeProduct(product)
 	}
 }

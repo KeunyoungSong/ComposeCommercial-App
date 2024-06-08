@@ -11,4 +11,6 @@ interface SearchRepository {
 	
 	// 최근 검색어 가져오기
 	fun getSearchKeywords() : Flow<List<SearchKeyword>>
+	
+	suspend fun likeProduct(product: Product)
 }

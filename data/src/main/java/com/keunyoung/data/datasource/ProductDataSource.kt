@@ -1,6 +1,7 @@
 package com.keunyoung.data.datasource
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.keunyoung.data.deserializer.BaseModelDeserializer
@@ -21,14 +22,13 @@ class ProductDataSource @Inject constructor(
 		val inputStreamReader = InputStreamReader(inputStream)
 		val jsonString = inputStreamReader.readText()
 		val type = object : TypeToken<List<BaseModel>>() {}.type
-		
-		emit(
-			GsonBuilder().registerTypeAdapter(
-				BaseModel::class.java, BaseModelDeserializer()
-			).create().fromJson(jsonString, type)
-		)
+		val result = GsonBuilder().registerTypeAdapter(
+			BaseModel::class.java, BaseModelDeserializer()
+		).create().fromJson<List<BaseModel>>(jsonString, type)
+		Log.d("ProductDataSource", "getHomeComponents() returned: $result")
+		emit(result)
 	}
-	
+
 	fun getProducts(): Flow<List<Product>> = getHomeComponents().map { it.filterIsInstance<Product>() }
 	
 }

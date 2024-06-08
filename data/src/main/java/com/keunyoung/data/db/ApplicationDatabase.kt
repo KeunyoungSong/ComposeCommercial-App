@@ -13,7 +13,7 @@ import com.keunyoung.data.db.entity.SearchKeywordEntity
 
 @Database(
 	entities = [PurchaseProductEntity::class, LikeProductEntity::class, BasketProductEntity::class, SearchKeywordEntity::class],
-	version = 1
+	version = 2
 )
 abstract class ApplicationDatabase : RoomDatabase() {
 	companion object {

@@ -36,3 +36,17 @@ fun LikeProductEntity.toDomainModel(): Product {
 		isLike = isLike
 	)
 }
+
+fun Product.toLikeProductEntity(): LikeProductEntity {
+	return LikeProductEntity(
+		productId = productId,
+		productName = productName,
+		imageUrl = imageUrl,
+		price = price,
+		category = category,
+		shop = shop,
+		isNew = isNew,
+		isFreeShipping = isFreeShipping,
+		isLike = isLike
+	)
+}

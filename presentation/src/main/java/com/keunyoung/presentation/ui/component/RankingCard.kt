@@ -1,6 +1,8 @@
 package com.keunyoung.presentation.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -8,8 +10,14 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -24,6 +32,8 @@ import com.keunyoung.domain.model.Product
 import com.keunyoung.presentation.R
 import com.keunyoung.presentation.model.RankingVM
 
+private const val DEFAULT_RANKING_ITEM_COUNT = 3
+
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun RankingCard(navHostController: NavHostController, presentationVM: RankingVM) {
@@ -37,13 +47,19 @@ fun RankingCard(navHostController: NavHostController, presentationVM: RankingVM)
 		) { index ->
 			Column {
 				RankingProductCard(
-					index * 3, presentationVM.model.productList[index * 3]
+					index = index * 3,
+					model = presentationVM.model.productList[index * 3],
+					rankingVM = presentationVM
 				) { product -> presentationVM.openRankingProduct(navHostController, product = product) }
 				RankingProductCard(
-					index * 3 + 1, presentationVM.model.productList[index * 3 + 1]
+					index = index * 3 + 1,
+					model = presentationVM.model.productList[index * 3 + 1],
+					rankingVM = presentationVM
 				) { product -> presentationVM.openRankingProduct(navHostController, product = product) }
 				RankingProductCard(
-					index * 3 + 2, presentationVM.model.productList[index * 3 + 2]
+					index = index * 3 + 2,
+					model = presentationVM.model.productList[index * 3 + 2],
+					rankingVM = presentationVM
 				) { product -> presentationVM.openRankingProduct(navHostController, product = product) }
 			}
 		}
@@ -51,27 +67,40 @@ fun RankingCard(navHostController: NavHostController, presentationVM: RankingVM)
 }
 
 @Composable
-fun RankingProductCard(index: Int, model: Product, onClick: (Product) -> Unit) {
-	Row(
-		modifier = Modifier
-			.padding(10.dp)
-			.fillMaxWidth()
-	) {
-		Text("${index + 1}", fontWeight = FontWeight.Bold)
-		Image(
-			painter = painterResource(id = R.drawable.product_image),
-			contentDescription = null,
-			contentScale = ContentScale.Crop,
+fun RankingProductCard(index: Int, model: Product, rankingVM: RankingVM, onClick: (Product) -> Unit) {
+	Box(modifier = Modifier.fillMaxWidth()) {
+		IconButton(
+			onClick = { rankingVM.likeProduct(model) }, modifier = Modifier.align(Alignment.BottomEnd)
+		) {
+			Icon(
+				imageVector = if (model.isLike) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+				contentDescription = null
+			)
+		}
+		Row(
 			modifier = Modifier
-				.width(70.dp)
-				.aspectRatio(0.7f)
-		)
-		Column(modifier = Modifier.padding(10.dp, 0.dp)) {
-			Text(fontSize = 14.sp, text = model.shop.shopName, modifier = Modifier.padding(bottom = 4.dp))
-			Text(fontSize = 14.sp, text = model.productName, modifier = Modifier.padding(bottom = 8.dp))
-			Price(product = model)
+				.padding(10.dp)
+				.fillMaxWidth()
+		) {
+			
+			Text("${index + 1}", fontWeight = FontWeight.Bold)
+			Image(painter = painterResource(id = R.drawable.product_image),
+				contentDescription = null,
+				contentScale = ContentScale.Crop,
+				modifier = Modifier
+					.width(70.dp)
+					.aspectRatio(0.7f)
+					.clickable { onClick(model) })
+			Column(modifier = Modifier.padding(10.dp, 0.dp)) {
+				Text(
+					fontSize = 14.sp, text = model.shop.shopName, modifier = Modifier.padding(bottom = 4.dp)
+				)
+				Text(
+					fontSize = 14.sp, text = model.productName, modifier = Modifier.padding(bottom = 8.dp)
+				)
+				Price(product = model)
+			}
 		}
 	}
 }
 
-private const val DEFAULT_RANKING_ITEM_COUNT = 3

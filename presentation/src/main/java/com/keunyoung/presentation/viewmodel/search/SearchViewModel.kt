@@ -62,6 +62,12 @@ class SearchViewModel @Inject constructor(
 		return ProductVM(product, this)
 	}
 	
+	override fun likeProduct(product: Product) {
+		viewModelScope.launch {
+			useCase.likeProduct(product)
+		}
+	}
+	
 	override fun openProduct(navHostController: NavHostController, product: Product) {
 		NavigationUtils.navigate(navHostController, NavigationRouteName.PRODUCT_DETAIL, product)
 	}

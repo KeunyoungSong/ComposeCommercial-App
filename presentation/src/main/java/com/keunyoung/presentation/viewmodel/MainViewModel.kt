@@ -35,7 +35,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-	mainUseCase: MainUseCase, categoryUseCase: CategoryUseCase, private val accountUseCase: AccountUseCase
+	private val mainUseCase: MainUseCase,
+	categoryUseCase: CategoryUseCase,
+	private val accountUseCase: AccountUseCase,
 ) : ViewModel(), ProductDelegate, BannerDelegate, CategoryDelegate {
 	private val _columnCount = MutableStateFlow(DEFAULT_COLUMN_COUNT)
 	val columnCount: StateFlow<Int> = _columnCount
@@ -47,13 +49,13 @@ class MainViewModel @Inject constructor(
 		NavigationUtils.navigate(navHostController, NavigationRouteName.SEARCH)
 	}
 	
-	fun signIn(accountInfo: AccountInfo){
+	fun signIn(accountInfo: AccountInfo) {
 		viewModelScope.launch {
 			accountUseCase.signInGoogle(accountInfo)
 		}
 	}
 	
-	fun signOut(){
+	fun signOut() {
 		viewModelScope.launch {
 			accountUseCase.signOut()
 		}
@@ -69,6 +71,12 @@ class MainViewModel @Inject constructor(
 		NavigationUtils.navigate(
 			controller = navHostController, routeName = NavigationRouteName.PRODUCT_DETAIL, args = product
 		)
+	}
+	
+	override fun likeProduct(product: Product) {
+		viewModelScope.launch {
+			mainUseCase.likeProduct(product)
+		}
 	}
 	
 	override fun openBanner(bannerId: String) {
