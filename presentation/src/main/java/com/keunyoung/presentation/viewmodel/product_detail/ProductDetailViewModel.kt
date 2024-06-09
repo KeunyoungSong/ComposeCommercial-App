@@ -19,9 +19,12 @@ class ProductDetailViewModel @Inject constructor(
 	private val _product = MutableStateFlow<Product?>(null)
 	val product: StateFlow<Product?> = _product
 	
-	suspend fun updateProduct(productId: String) {
-		useCase.getProductDetail(productId).collectLatest {
-			_product.emit(it)
+	fun updateProduct(productId: String) {
+		viewModelScope.launch {
+			useCase.getProductDetail(productId).collectLatest {
+				Log.d("ProductDetailViewModel", "updateProduct: $it")
+				_product.emit(it)
+			}
 		}
 	}
 	

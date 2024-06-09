@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -29,6 +30,7 @@ import androidx.navigation.navArgument
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.gson.Gson
 import com.keunyoung.domain.model.Category
+import com.keunyoung.presentation.ui.basket.BasketScreen
 import com.keunyoung.presentation.ui.category.CategoryScreen
 import com.keunyoung.presentation.ui.main.LikeScreen
 import com.keunyoung.presentation.ui.main.MainCategoryScreen
@@ -113,6 +115,9 @@ fun MainNavigationScreen(
 		composable(NavigationRouteName.MAIN_LIKE){
 			LikeScreen(navHostController = navController, viewModel = viewModel)
 		}
+		composable(NavigationRouteName.BASKET){
+			BasketScreen()
+		}
 		composable(
 			route = NavigationRouteName.CATEGORY + "/{category}",
 			arguments = listOf(navArgument("category") { type = NavType.StringType })
@@ -145,6 +150,9 @@ fun MainHeader(viewModel: MainViewModel, navHostController: NavHostController) {
 	TopAppBar(title = { Text(text = "My App") }, actions = {
 		IconButton(onClick = { viewModel.openSearchForm(navHostController) }) {
 			Icon(Icons.Filled.Search, "Search Icon")
+		}
+		IconButton(onClick = { viewModel.openBasket(navHostController) }) {
+			Icon(Icons.Filled.ShoppingCart, "Shopping Icon")
 		}
 	})
 }
