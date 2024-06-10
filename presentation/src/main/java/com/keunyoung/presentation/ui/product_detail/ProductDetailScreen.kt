@@ -1,5 +1,6 @@
 package com.keunyoung.presentation.ui.product_detail
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -46,7 +47,7 @@ fun ProductDetailScreen(productId: String, viewModel: ProductDetailViewModel = h
 	LaunchedEffect(key1 = productId) {
 		viewModel.updateProduct(productId = productId)
 	}
-	
+	Log.d("song", "ProductDetailScreen: called")
 	Column(modifier = Modifier.fillMaxSize()) {
 		Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
 			Image(

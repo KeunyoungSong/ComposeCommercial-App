@@ -1,5 +1,6 @@
 package com.keunyoung.presentation.ui.main
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,6 +28,8 @@ fun MainCategoryScreen(
 	viewModel: MainViewModel, navController: NavHostController
 ) {
 	val categoryList by viewModel.categoryList.collectAsState(initial = listOf())
+	
+	Log.d("song", "CategoryScreen: called")
 	
 	LazyVerticalGrid(columns = GridCells.Fixed(3)) {
 		items(categoryList.size, span = { GridItemSpan(1) }) { index ->

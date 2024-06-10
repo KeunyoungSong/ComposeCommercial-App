@@ -1,5 +1,6 @@
 package com.keunyoung.presentation.ui.category
 
+import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -26,7 +27,6 @@ fun CategoryScreen(
 	LaunchedEffect(key1 = category) {
 		viewModel.updateCategory(category = category)
 	}
-	
 	LazyColumn(
 		modifier = Modifier.fillMaxSize(), contentPadding = PaddingValues(10.dp)
 	) {

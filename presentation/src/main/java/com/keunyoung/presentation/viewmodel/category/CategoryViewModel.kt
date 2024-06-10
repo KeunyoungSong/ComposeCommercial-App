@@ -1,5 +1,6 @@
 package com.keunyoung.presentation.viewmodel.category
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
@@ -8,7 +9,7 @@ import com.keunyoung.domain.model.Product
 import com.keunyoung.domain.usecase.CategoryUseCase
 import com.keunyoung.presentation.delegate.ProductDelegate
 import com.keunyoung.presentation.model.ProductVM
-import com.keunyoung.presentation.ui.NavigationRouteName
+import com.keunyoung.presentation.ui.ProductDetailNav
 import com.keunyoung.presentation.utils.NavigationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,7 @@ class CategoryViewModel @Inject constructor(
 	
 	suspend fun updateCategory(category: Category) {
 		useCase.getProductsByCategory(category = category).collectLatest {
+			Log.d("song", "categoryName: ${category.categoryId}, categoryName: ${category.categoryName}")
 			_productList.emit(convertToPresentationVM(it))
 		}
 	}
@@ -37,7 +39,7 @@ class CategoryViewModel @Inject constructor(
 	}
 	
 	override fun openProduct(navHostController: NavHostController, product: Product) {
-		NavigationUtils.navigate(navHostController, NavigationRouteName.PRODUCT_DETAIL, product)
+		NavigationUtils.navigate(navHostController, ProductDetailNav.navigateWithArg(product.productId))
 	}
 	
 	override fun likeProduct(product: Product) {

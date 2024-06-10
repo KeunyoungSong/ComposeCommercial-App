@@ -1,7 +1,6 @@
 package com.keunyoung.presentation.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -44,7 +43,7 @@ class MainActivity : ComponentActivity() {
 	}
 	
 	companion object {
-		private const val DEFAULT_COLUMN_SIZE = 120
+		private const val DEFAULT_COLUMN_SIZE = 160
 	}
 }
 

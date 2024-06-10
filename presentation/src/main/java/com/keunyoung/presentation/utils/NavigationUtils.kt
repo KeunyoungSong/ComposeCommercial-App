@@ -1,34 +1,24 @@
 package com.keunyoung.presentation.utils
 
-import android.net.Uri
-import android.os.Parcelable
 import androidx.navigation.NavHostController
-import com.google.gson.Gson
-import com.keunyoung.domain.model.Product
+import com.keunyoung.presentation.ui.BasketNav
+import com.keunyoung.presentation.ui.CategoryNav
+import com.keunyoung.presentation.ui.Destination
+import com.keunyoung.presentation.ui.MainNav
+import com.keunyoung.presentation.ui.NavigationRouteName
+import com.keunyoung.presentation.ui.ProductDetailNav
+import com.keunyoung.presentation.ui.SearchNav
 
 object NavigationUtils {
 	
 	fun navigate(
 		controller: NavHostController,
 		routeName: String,
-		args: Any? = null,
 		backStackRouteName: String? = null,
 		isLaunchSingleTop: Boolean = true,
 		needToRestoreState: Boolean = true
 	) {
-		// TODO 딥링크 시에도 사용
-		var argument = ""
-		if (args != null) {
-			when (args) {
-				is Parcelable -> {
-					argument = String.format("/%s", Uri.parse(Gson().toJson(args)))
-				}
-				is Product -> {
-					argument = String.format("/%s", args.productId)
-				}
-			}
-		}
-		controller.navigate("$routeName$argument") {
+		controller.navigate(routeName) {
 			if (backStackRouteName != null) {
 				popUpTo(backStackRouteName) { saveState = true }
 			}
@@ -36,4 +26,20 @@ object NavigationUtils {
 			restoreState = needToRestoreState
 		}
 	}
+	
+	fun findDestination(route: String?): Destination {
+		return when (route) {
+			NavigationRouteName.MAIN_MY_PAGE -> MainNav.MyPage
+			NavigationRouteName.MAIN_LIKE -> MainNav.Like
+			NavigationRouteName.MAIN_HOME -> MainNav.Home
+			NavigationRouteName.MAIN_CATEGORY -> MainNav.Category
+			NavigationRouteName.SEARCH -> SearchNav
+			NavigationRouteName.BASKET -> BasketNav
+			
+			CategoryNav.routeWithArgName()-> CategoryNav
+			ProductDetailNav.routeWithArgName() -> ProductDetailNav
+			else -> MainNav.Home
+		}
+	}
+	
 }

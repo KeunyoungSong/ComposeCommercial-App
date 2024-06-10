@@ -22,7 +22,7 @@ class ProductDetailViewModel @Inject constructor(
 	fun updateProduct(productId: String) {
 		viewModelScope.launch {
 			useCase.getProductDetail(productId).collectLatest {
-				Log.d("ProductDetailViewModel", "updateProduct: $it")
+				Log.d("song", "id: $productId, product: $it")
 				_product.emit(it)
 			}
 		}

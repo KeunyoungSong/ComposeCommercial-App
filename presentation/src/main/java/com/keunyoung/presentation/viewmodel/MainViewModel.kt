@@ -24,7 +24,10 @@ import com.keunyoung.presentation.model.CarouselVM
 import com.keunyoung.presentation.model.PresentationVM
 import com.keunyoung.presentation.model.ProductVM
 import com.keunyoung.presentation.model.RankingVM
-import com.keunyoung.presentation.ui.NavigationRouteName
+import com.keunyoung.presentation.ui.BasketNav
+import com.keunyoung.presentation.ui.CategoryNav
+import com.keunyoung.presentation.ui.ProductDetailNav
+import com.keunyoung.presentation.ui.SearchNav
 import com.keunyoung.presentation.utils.NavigationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -49,11 +52,11 @@ class MainViewModel @Inject constructor(
 	val likeProductList = likeUseCase.getLikeProducts().map(::convertToPresentationVM)
 	
 	fun openSearchForm(navHostController: NavHostController) {
-		NavigationUtils.navigate(navHostController, NavigationRouteName.SEARCH)
+		NavigationUtils.navigate(navHostController, SearchNav.route)
 	}
 	
-	fun openBasket(navHostController: NavHostController){
-		NavigationUtils.navigate(navHostController, NavigationRouteName.BASKET)
+	fun openBasket(navHostController: NavHostController) {
+		NavigationUtils.navigate(navHostController, BasketNav.route)
 	}
 	
 	fun signIn(accountInfo: AccountInfo) {
@@ -76,7 +79,8 @@ class MainViewModel @Inject constructor(
 	
 	override fun openProduct(navHostController: NavHostController, product: Product) {
 		NavigationUtils.navigate(
-			controller = navHostController, routeName = NavigationRouteName.PRODUCT_DETAIL, args = product
+			controller = navHostController,
+			routeName = ProductDetailNav.navigateWithArg(product.productId)
 		)
 	}
 	
@@ -91,8 +95,10 @@ class MainViewModel @Inject constructor(
 	}
 	
 	override fun openCategory(navHostController: NavHostController, category: Category) {
+//		NavigationUtils.navigate(controller = navHostController, routeName = NavigationRouteName.CATEGORY, args = category)
 		NavigationUtils.navigate(
-			controller = navHostController, routeName = NavigationRouteName.CATEGORY, args = category
+			controller = navHostController,
+			routeName = CategoryNav.navigateWithArg(category)
 		)
 	}
 	

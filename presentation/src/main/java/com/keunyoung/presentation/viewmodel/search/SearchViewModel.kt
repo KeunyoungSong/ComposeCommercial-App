@@ -1,6 +1,5 @@
 package com.keunyoung.presentation.viewmodel.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
@@ -10,7 +9,7 @@ import com.keunyoung.domain.model.SearchKeyword
 import com.keunyoung.domain.usecase.SearchUseCase
 import com.keunyoung.presentation.delegate.ProductDelegate
 import com.keunyoung.presentation.model.ProductVM
-import com.keunyoung.presentation.ui.NavigationRouteName
+import com.keunyoung.presentation.ui.ProductDetailNav
 import com.keunyoung.presentation.utils.NavigationUtils
 import com.keunyoung.presentation.viewmodel.SearchManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -69,6 +68,6 @@ class SearchViewModel @Inject constructor(
 	}
 	
 	override fun openProduct(navHostController: NavHostController, product: Product) {
-		NavigationUtils.navigate(navHostController, NavigationRouteName.PRODUCT_DETAIL, product)
+		NavigationUtils.navigate(navHostController, ProductDetailNav.navigateWithArg(product.productId))
 	}
 }
