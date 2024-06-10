@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.keunyoung.data.db.ApplicationDatabase
 import com.keunyoung.data.db.dao.BasketDao
 import com.keunyoung.data.db.dao.LikeDao
+import com.keunyoung.data.db.dao.PurchaseHistoryDao
 import com.keunyoung.data.db.dao.SearchDao
 import dagger.Module
 import dagger.Provides
@@ -42,6 +43,12 @@ object DatabaseModule {
 	@Singleton
 	fun provideBasketDao(database: ApplicationDatabase): BasketDao {
 		return database.basketDao()
+	}
+	
+	@Provides
+	@Singleton
+	fun providePurchaseHistoryDao(database: ApplicationDatabase): PurchaseHistoryDao {
+		return database.purchaseHistoryDao()
 	}
 	
 }
