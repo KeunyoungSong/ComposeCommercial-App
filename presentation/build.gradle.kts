@@ -60,6 +60,7 @@ dependencies {
 	implementation("com.google.android.gms:play-services-auth:21.2.0")
 	// 카카오 로그인 API 모듈
 	implementation ("com.kakao.sdk:v2-user:2.20.1")
+	implementation("io.coil-kt:coil-compose:2.5.0")
 	
 	
 	implementation(libs.androidx.core.ktx)
