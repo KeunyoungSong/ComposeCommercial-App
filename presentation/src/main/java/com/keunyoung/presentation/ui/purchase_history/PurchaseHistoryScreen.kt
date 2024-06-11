@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -34,56 +35,59 @@ fun PurchaseHistoryScreen(
 ) {
 	val purchaseHistory by viewModel.purchaseHistory.collectAsState(listOf())
 	
-	LazyColumn(modifier = Modifier.fillMaxWidth().padding(10.dp)){
-		items(purchaseHistory.size){ index ->
-			PurchaseHistoryCard(purchaseHistory[index])
+	LazyColumn(modifier = Modifier
+		.fillMaxWidth()
+		.padding(10.dp)) {
+		purchaseHistory.forEach{
+			PurchaseHistoryCard(purchaseHistory = it)
 		}
 	}
 }
 
-@Composable
-fun PurchaseHistoryCard(purchaseHistory: PurchaseHistory) {
-	LazyColumn(modifier = Modifier.fillMaxWidth(), contentPadding = PaddingValues(10.dp)) {
-		item {
-			Text(fontSize = 16.sp, text = "${purchaseHistory.purchaseAt}")
-		}
-		items(purchaseHistory.basketList.size) { index ->
-			val currentItem = purchaseHistory.basketList[index]
-			Row(modifier = Modifier.padding(10.dp)) {
-				Image(
-					painter = painterResource(R.drawable.product_image),
-					contentDescription = null,
-					contentScale = ContentScale.Crop,
-					modifier = Modifier.size(60.dp)
-				)
-				Column(
-					modifier = Modifier
-						.padding(10.dp)
-						.weight(1f)
-				) {
-					Text(
-						fontSize = 14.sp,
-						text = "${currentItem.product.shop.shopName} - ${currentItem.product.productName}",
-						modifier = Modifier.padding(10.dp)
-					)
-					Price(product = currentItem.product)
-				}
+fun LazyListScope.PurchaseHistoryCard(purchaseHistory: PurchaseHistory) {
+	item {
+		Text(fontSize = 16.sp, text = "${purchaseHistory.purchaseAt}")
+	}
+	items(purchaseHistory.basketList.size) { index ->
+		val currentItem = purchaseHistory.basketList[index]
+		Row(modifier = Modifier.padding(10.dp)) {
+			Image(
+				painter = painterResource(R.drawable.product_image),
+				contentDescription = null,
+				contentScale = ContentScale.Crop,
+				modifier = Modifier.size(60.dp)
+			)
+			Column(
+				modifier = Modifier
+					.padding(10.dp)
+					.weight(1f)
+			) {
 				Text(
-					text = "${currentItem.count}개",
-					fontSize = 18.sp,
-					fontWeight = FontWeight.SemiBold,
-					textAlign = TextAlign.Center,
-					modifier = Modifier.padding(30.dp)
+					fontSize = 14.sp,
+					text = "${currentItem.product.shop.shopName} - ${currentItem.product.productName}",
+					modifier = Modifier.padding(10.dp)
 				)
+				Price(product = currentItem.product)
 			}
-		}
-		item {
-			Text(modifier = Modifier.fillMaxWidth().padding(5.dp), fontSize = 16.sp, text =
-			"${getTotalPrice(purchaseHistory.basketList)} 결제완료")
+			Text(
+				text = "${currentItem.count}개",
+				fontSize = 18.sp,
+				fontWeight = FontWeight.SemiBold,
+				textAlign = TextAlign.Center,
+				modifier = Modifier.padding(30.dp)
+			)
 		}
 	}
+	item {
+		Text(
+			modifier = Modifier
+				.fillMaxWidth()
+				.padding(5.dp),
+			fontSize = 16.sp,
+			text = "${getTotalPrice(purchaseHistory.basketList)} 결제완료"
+		)
+	}
 }
-
 
 private fun getTotalPrice(basketProductList: List<BasketProduct>): String {
 	return basketProductList.sumOf {
