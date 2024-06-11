@@ -4,7 +4,7 @@ plugins {
 	id("kotlin-kapt")
 	id("dagger.hilt.android.plugin")
 	id("com.google.gms.google-services")
-	alias(libs.plugins.googleFirebaseCrashlytics)
+	id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -29,7 +29,12 @@ android {
 			isMinifyEnabled = false
 			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 		}
+		debug {
+			isDebuggable = true
+			applicationIdSuffix = ".dev"
+		}
 	}
+	
 	compileOptions {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 		targetCompatibility = JavaVersion.VERSION_1_8
@@ -58,7 +63,7 @@ dependencies {
 	
 	implementation(libs.hilt.android)
 	implementation(libs.androidx.room.ktx)
-	implementation(libs.firebase.crashlytics)
+	
 	kapt(libs.hilt.compiler)
 	// 구글 로그인을 위한 의존성
 	implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
@@ -67,6 +72,13 @@ dependencies {
 	implementation("com.google.android.gms:play-services-auth:21.2.0")
 	// 카카오 로그인을 위한 의존성
 	implementation ("com.kakao.sdk:v2-user:2.20.1")
+	// Crashlytics
+	implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+	
+	// Add the dependencies for the Crashlytics and Analytics libraries
+	// When using the BoM, you don't specify versions in Firebase library dependencies
+	implementation("com.google.firebase:firebase-crashlytics")
+	implementation("com.google.firebase:firebase-analytics")
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)

@@ -79,6 +79,7 @@ class MainViewModel @Inject constructor(
 	}
 	
 	override fun openProduct(navHostController: NavHostController, product: Product) {
+		throw RuntimeException("1234 crash")
 		NavigationUtils.navigate(
 			controller = navHostController,
 			routeName = ProductDetailNav.navigateWithArg(product.productId)
