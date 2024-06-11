@@ -1,3 +1,4 @@
+
 plugins {
 	alias(libs.plugins.androidLibrary)
 	alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -36,6 +37,14 @@ dependencies {
 	
 	implementation(libs.hilt.android)
 	kapt(libs.hilt.compiler)
+	
+	// 테스팅을 위한 의존성 추가
+	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+	testImplementation("app.cash.turbine:turbine:0.12.1")
+	testImplementation("com.google.truth:truth:1.1.3")
+	testImplementation("org.mockito:mockito-core:5.0.0")
+	testImplementation("org.mockito:mockito-inline:5.0.0")
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)
