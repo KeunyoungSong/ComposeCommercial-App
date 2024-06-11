@@ -18,6 +18,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,6 +31,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -43,7 +47,7 @@ import com.keunyoung.domain.model.AccountInfo
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
 @Composable
-fun MyPageScreen(viewModel: MainViewModel, googleSignInClient: GoogleSignInClient) {
+fun MyPageScreen(viewModel: MainViewModel, googleSignInClient: GoogleSignInClient, navHostController: NavHostController) {
 	val accountInfo by viewModel.accountInfo.collectAsState()
 	val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 	val context = LocalContext.current
@@ -81,8 +85,7 @@ fun MyPageScreen(viewModel: MainViewModel, googleSignInClient: GoogleSignInClien
 					.align(Alignment.CenterHorizontally)
 					.padding(5.dp)
 					.size(100.dp)
-					.clip(CircleShape)
-				,
+					.clip(CircleShape),
 				contentScale = ContentScale.Crop
 			)
 			Spacer(modifier = Modifier.height(20.dp))
@@ -91,6 +94,13 @@ fun MyPageScreen(viewModel: MainViewModel, googleSignInClient: GoogleSignInClien
 				textAlign = TextAlign.Center,
 				modifier = Modifier.fillMaxWidth()
 			)
+			Spacer(modifier = Modifier.height(50.dp))
+			Button(onClick = {viewModel.openPurchaseHistory(navHostController = navHostController)}, modifier = Modifier
+				.fillMaxWidth()
+				.padding(10.dp)) {
+				Text("결제내역 보기", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+				Icon(Icons.Filled.ArrowForward, contentDescription = null)
+			}
 			Spacer(modifier = Modifier.weight(1f))
 			Button(onClick = {
 				viewModel.signOut()
@@ -99,7 +109,9 @@ fun MyPageScreen(viewModel: MainViewModel, googleSignInClient: GoogleSignInClien
 					AccountInfo.Type.GOOGLE -> firebaseAuth.signOut()
 					else -> Unit
 				}
-			}, modifier = Modifier.fillMaxWidth().padding(10.dp)) {
+			}, modifier = Modifier
+				.fillMaxWidth()
+				.padding(10.dp)) {
 				Text("로그아웃")
 			}
 			Spacer(modifier = Modifier.height(70.dp))

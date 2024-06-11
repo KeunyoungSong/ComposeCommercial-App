@@ -27,6 +27,7 @@ import com.keunyoung.presentation.model.RankingVM
 import com.keunyoung.presentation.ui.BasketNav
 import com.keunyoung.presentation.ui.CategoryNav
 import com.keunyoung.presentation.ui.ProductDetailNav
+import com.keunyoung.presentation.ui.PurchaseHistoryNav
 import com.keunyoung.presentation.ui.SearchNav
 import com.keunyoung.presentation.utils.NavigationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -92,6 +93,10 @@ class MainViewModel @Inject constructor(
 	
 	override fun openBanner(bannerId: String) {
 	
+	}
+	
+	fun openPurchaseHistory(navHostController: NavHostController){
+		NavigationUtils.navigate(navHostController, PurchaseHistoryNav.route)
 	}
 	
 	override fun openCategory(navHostController: NavHostController, category: Category) {

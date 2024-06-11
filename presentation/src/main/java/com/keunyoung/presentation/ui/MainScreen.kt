@@ -130,7 +130,11 @@ fun MainNavigationScreen(
 			MainCategoryScreen(viewModel = viewModel, navController = navController)
 		}
 		composable(route = MainNav.MyPage.route, deepLinks = MainNav.MyPage.deepLinks) {
-			MyPageScreen(viewModel = viewModel, googleSignInClient = googleSignInClient)
+			MyPageScreen(
+				viewModel = viewModel,
+				googleSignInClient = googleSignInClient,
+				navHostController = navController
+			)
 		}
 		composable(route = MainNav.Like.route, deepLinks = MainNav.Like.deepLinks) {
 			LikeScreen(navHostController = navController, viewModel = viewModel)
@@ -140,6 +144,9 @@ fun MainNavigationScreen(
 		}
 		composable(route = SearchNav.route, deepLinks = SearchNav.deepLinks) {
 			SearchScreen(navHostController = navController)
+		}
+		composable(route = PurchaseHistoryNav.route, deepLinks = PurchaseHistoryNav.deepLinks) {
+			// TODO: PurchaseHistoryScreen()
 		}
 		composable(
 			route = CategoryNav.routeWithArgName(),
