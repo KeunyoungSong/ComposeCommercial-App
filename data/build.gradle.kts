@@ -44,6 +44,7 @@ dependencies {
 	implementation("com.google.code.gson:gson:2.11.0")
 	
 	// 테스팅을 위한 의존성 추가
+	testImplementation(libs.junit)
 	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 	testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 	testImplementation("app.cash.turbine:turbine:0.12.1")
@@ -51,14 +52,13 @@ dependencies {
 	testImplementation("org.mockito:mockito-core:5.0.0")
 	testImplementation("org.mockito:mockito-inline:5.0.0")
 	// 테스팅을 위한 추가 의존성
-	testImplementation("com.google.dagger:hilt-android-testing:2.45")
 	testImplementation("org.robolectric:robolectric:4.10")
-	kaptTest("com.google.dagger:hilt-android-compiler:2.45")
+	testImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+	kaptTest("com.google.dagger:hilt-android-compiler:2.51.1")
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.appcompat)
 	implementation(libs.material)
-	testImplementation(libs.junit)
 	androidTestImplementation(libs.androidx.junit)
 	androidTestImplementation(libs.androidx.espresso.core)
 }
