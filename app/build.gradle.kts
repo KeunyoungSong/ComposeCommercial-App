@@ -4,6 +4,7 @@ plugins {
 	id("kotlin-kapt")
 	id("dagger.hilt.android.plugin")
 	id("com.google.gms.google-services")
+	alias(libs.plugins.googleFirebaseCrashlytics)
 }
 
 android {
@@ -57,6 +58,7 @@ dependencies {
 	
 	implementation(libs.hilt.android)
 	implementation(libs.androidx.room.ktx)
+	implementation(libs.firebase.crashlytics)
 	kapt(libs.hilt.compiler)
 	// 구글 로그인을 위한 의존성
 	implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
