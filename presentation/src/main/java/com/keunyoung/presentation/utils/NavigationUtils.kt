@@ -7,6 +7,7 @@ import com.keunyoung.presentation.ui.Destination
 import com.keunyoung.presentation.ui.MainNav
 import com.keunyoung.presentation.ui.NavigationRouteName
 import com.keunyoung.presentation.ui.ProductDetailNav
+import com.keunyoung.presentation.ui.PurchaseHistoryNav
 import com.keunyoung.presentation.ui.SearchNav
 
 object NavigationUtils {
@@ -35,6 +36,7 @@ object NavigationUtils {
 			NavigationRouteName.MAIN_CATEGORY -> MainNav.Category
 			NavigationRouteName.SEARCH -> SearchNav
 			NavigationRouteName.BASKET -> BasketNav
+			NavigationRouteName.PURCHASE_HISTORY -> PurchaseHistoryNav
 			
 			CategoryNav.routeWithArgName()-> CategoryNav
 			ProductDetailNav.routeWithArgName() -> ProductDetailNav

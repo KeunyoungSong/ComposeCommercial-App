@@ -33,6 +33,7 @@ import com.keunyoung.presentation.ui.main.MainCategoryScreen
 import com.keunyoung.presentation.ui.main.MainHomeScreen
 import com.keunyoung.presentation.ui.main.MyPageScreen
 import com.keunyoung.presentation.ui.product_detail.ProductDetailScreen
+import com.keunyoung.presentation.ui.purchase_history.PurchaseHistoryScreen
 import com.keunyoung.presentation.ui.search.SearchScreen
 import com.keunyoung.presentation.utils.NavigationUtils
 import com.keunyoung.presentation.viewmodel.MainViewModel
@@ -146,7 +147,7 @@ fun MainNavigationScreen(
 			SearchScreen(navHostController = navController)
 		}
 		composable(route = PurchaseHistoryNav.route, deepLinks = PurchaseHistoryNav.deepLinks) {
-			// TODO: PurchaseHistoryScreen()
+			PurchaseHistoryScreen()
 		}
 		composable(
 			route = CategoryNav.routeWithArgName(),

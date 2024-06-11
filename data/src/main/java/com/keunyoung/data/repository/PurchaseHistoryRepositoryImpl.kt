@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class PurchaseHistoryImpl @Inject constructor(
+class PurchaseHistoryRepositoryImpl @Inject constructor(
 	private val purchaseHistoryDao: PurchaseHistoryDao
 ) : PurchaseHistoryRepository {
 	override fun getPurchaseHistory(): Flow<List<PurchaseHistory>> {
