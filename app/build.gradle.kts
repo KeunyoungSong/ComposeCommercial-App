@@ -8,6 +8,14 @@ plugins {
 }
 
 android {
+	signingConfigs {
+		create("release") {
+			storeFile = file("/Users/brandon/Documents/android-key/test.jks.kts")
+			storePassword = "123456"
+			keyAlias = "test-key"
+			keyPassword = "123456"
+		}
+	}
 	namespace = "com.keunyoung.composecommercial_app"
 	compileSdk = 34
 	
@@ -26,9 +34,8 @@ android {
 	
 	buildTypes {
 		release {
-			isMinifyEnabled = true
-			isShrinkResources = true
 			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+			signingConfig = signingConfigs.getByName("release")
 		}
 		debug {
 			isDebuggable = true

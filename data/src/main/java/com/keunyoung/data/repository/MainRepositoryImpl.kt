@@ -13,21 +13,20 @@ import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
-	private val dataSource: ProductDataSource,
-	private val likeDao: LikeDao
+	private val dataSource: ProductDataSource, private val likeDao: LikeDao
 ) : MainRepository {
-	
-	override fun getModelList(): Flow<List<BaseModel>> {
-		return dataSource.getHomeComponentList().combine(likeDao.getAll()) { homeComponentList, likeList ->
-			homeComponentList.map { baseModel -> mappingLike(baseModel, likeList.map { it.productId }) }
-		}
-	}
 	
 	override suspend fun likeProduct(product: Product) {
 		if (product.isLike) {
 			likeDao.delete(product.productId)
 		} else {
 			likeDao.upsert(product.toLikeProductEntity().copy(isLike = true))
+		}
+	}
+	
+	override fun getModelList(): Flow<List<BaseModel>> {
+		return dataSource.getHomeComponentList().combine(likeDao.getAll()) { homeComponentList, likeList ->
+			homeComponentList.map { baseModel -> mappingLike(baseModel, likeList.map { it.productId }) }
 		}
 	}
 	

@@ -60,9 +60,7 @@ fun MainHomeScreen(navHostController: NavHostController, viewModel: MainViewMode
 					is BannerVM -> BannerCard(presentationVM = item)
 					is BannerListVM -> BannerListCard(presentationVM = item)
 					is ProductVM -> ProductCard(navHostController = navHostController, presentationVM = item)
-					is CarouselVM -> CarouselCard(
-						navHostController = navHostController, presentationVM = item
-					)
+					is CarouselVM -> CarouselCard(navHostController = navHostController, presentationVM = item)
 					is RankingVM -> RankingCard(navHostController = navHostController, presentationVM = item)
 				}
 			}
