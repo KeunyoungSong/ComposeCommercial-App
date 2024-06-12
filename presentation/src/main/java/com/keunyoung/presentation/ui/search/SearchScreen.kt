@@ -202,7 +202,6 @@ fun SearchContent(
 	Column {
 		// 검색바
 		SearchBox(keyword = keyword, onValueChange = { keyword = it }) {
-			Log.d("result", "keyword: $keyword")
 			viewModel.search(keyword = keyword)
 			keyboardController?.hide()
 		}

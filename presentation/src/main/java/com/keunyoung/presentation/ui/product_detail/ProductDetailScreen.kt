@@ -47,7 +47,6 @@ fun ProductDetailScreen(productId: String, viewModel: ProductDetailViewModel = h
 	LaunchedEffect(key1 = productId) {
 		viewModel.updateProduct(productId = productId)
 	}
-	Log.d("song", "ProductDetailScreen: called")
 	Column(modifier = Modifier.fillMaxSize()) {
 		Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
 			Image(

@@ -27,7 +27,6 @@ class CategoryViewModel @Inject constructor(
 	
 	suspend fun updateCategory(category: Category) {
 		useCase.getProductsByCategory(category = category).collectLatest {
-			Log.d("song", "categoryName: ${category.categoryId}, categoryName: ${category.categoryName}")
 			_productList.emit(convertToPresentationVM(it))
 		}
 	}

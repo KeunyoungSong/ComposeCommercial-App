@@ -1,6 +1,5 @@
 package com.keunyoung.data.repository
 
-import android.util.Log
 import com.keunyoung.data.datasource.ProductDataSource
 import com.keunyoung.data.db.dao.BasketDao
 import com.keunyoung.data.db.entity.toBasketProductEntity
@@ -19,22 +18,6 @@ class ProductDetailRepositoryImpl @Inject constructor(
 ) : ProductDetailRepository {
 	override fun getProductDetail(productId: String): Flow<Product?> {
 		return dataSource.getHomeComponentList().map { productList ->
-			Log.d("ProductDetailRepositoryImpl", "id:$productId, getProductDetail: productList: $productList")
-			Log.d(
-				"ProductDetailRepositoryImpl", "find: ${
-					productList.find {
-						when (it) {
-							is Banner -> false
-							is BannerList -> false
-							is Carousel -> false
-							is Product -> {
-								it.productId == productId
-							}
-							is Ranking -> false
-						}
-					}
-				}"
-			)
 			productList.filterIsInstance<Product>().firstOrNull() { it.productId == productId }
 		}
 	}

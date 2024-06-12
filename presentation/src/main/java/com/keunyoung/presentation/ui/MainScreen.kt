@@ -1,6 +1,5 @@
 package com.keunyoung.presentation.ui
 
-import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -55,24 +54,19 @@ fun MainNavigationScreen(googleSignInClient: GoogleSignInClient) {
 	val snackbarHostState = remember { SnackbarHostState() }
 	
 	
-	Scaffold(
-		topBar = {
-			MainHeader(viewModel, navHostController, currentRoute)
-		},
-		bottomBar = {
-			if (MainNav.isMainRoute(currentRoute)) MainBottomNavigationBar(
-				navHostController, currentRoute
+	Scaffold(topBar = {
+		MainHeader(viewModel, navHostController, currentRoute)
+	}, bottomBar = {
+		if (MainNav.isMainRoute(currentRoute)) MainBottomNavigationBar(
+			navHostController, currentRoute
+		)
+	}, snackbarHost = {
+		SnackbarHost(hostState = snackbarHostState) { data ->
+			Snackbar(
+				snackbarData = data, modifier = Modifier.padding(50.dp), shape = RoundedCornerShape(10.dp)
 			)
-		},
-		snackbarHost = {
-			SnackbarHost(hostState = snackbarHostState) { data ->
-				Snackbar(
-					snackbarData = data, modifier = Modifier.padding(50.dp),
-					shape = RoundedCornerShape(10.dp)
-				)
-			}
 		}
-		) { innerPadding ->
+	}) { innerPadding ->
 		MainNavigationScreen(
 			navController = navHostController,
 			innerPadding = innerPadding,
@@ -186,7 +180,6 @@ fun MainNavigationScreen(
 			deepLinks = ProductDetailNav.deepLinks
 		) { navBackStackEntry ->
 			val productId = ProductDetailNav.findArgument(navBackStackEntry)
-			Log.d("productId", "MainScreen productId: $productId")
 			if (productId != null) {
 				ProductDetailScreen(productId)
 			}
@@ -200,7 +193,7 @@ fun popupSnackBar(
 	snackbarHostState: SnackbarHostState,
 	message: String,
 	onDismissCallback: () -> Unit = {}
-){
+) {
 	scope.launch {
 		snackbarHostState.showSnackbar(message)
 		onDismissCallback()

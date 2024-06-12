@@ -1,6 +1,5 @@
 package com.keunyoung.presentation.ui
 
-import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Favorite
@@ -69,8 +68,6 @@ object CategoryNav : DestinationArg<Category> {
 		listOf(navArgument(argName) { type = NavType.StringType})
 	
 	override fun findArgument(navBackStackEntry: NavBackStackEntry): Category? {
-		Log.d("ProductDetailNav", "navBackStackEntry: $navBackStackEntry")
-		Log.d("ProductDetailNav", "navBackStackEntry.arguments: ${navBackStackEntry.arguments}")
 		val categoryString = navBackStackEntry.arguments?.getString(argName)
 		return GsonUtils.fromJson<Category>(categoryString)
 	}
@@ -91,10 +88,7 @@ object ProductDetailNav : DestinationArg<String> {
 		listOf(navArgument(argName) { type = NavType.StringType })
 	
 	override fun findArgument(navBackStackEntry: NavBackStackEntry): String? {
-		Log.d("ProductDetailNav", "navBackStackEntry: $navBackStackEntry")
-		Log.d("ProductDetailNav", "navBackStackEntry.arguments: ${navBackStackEntry.arguments}")
 		val productId = navBackStackEntry.arguments?.getString(argName)
-		Log.d("ProductDetailNav", "productId: $productId")
 		return GsonUtils.fromJson<String>(productId)
 	}
 	
