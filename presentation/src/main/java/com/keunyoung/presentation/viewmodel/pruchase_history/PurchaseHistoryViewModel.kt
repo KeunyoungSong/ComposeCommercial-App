@@ -1,4 +1,4 @@
-package com.keunyoung.presentation.viewmodel
+package com.keunyoung.presentation.viewmodel.pruchase_history
 
 import androidx.lifecycle.ViewModel
 import com.keunyoung.domain.usecase.PurchaseHistoryUseCase

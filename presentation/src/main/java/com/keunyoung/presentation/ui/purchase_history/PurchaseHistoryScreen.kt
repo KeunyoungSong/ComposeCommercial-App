@@ -1,9 +1,7 @@
 package com.keunyoung.presentation.ui.purchase_history
 
-import android.inputmethodservice.Keyboard
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -27,7 +25,7 @@ import com.keunyoung.domain.model.PurchaseHistory
 import com.keunyoung.presentation.R
 import com.keunyoung.presentation.ui.component.Price
 import com.keunyoung.presentation.utils.NumberUtils
-import com.keunyoung.presentation.viewmodel.PurchaseHistoryViewModel
+import com.keunyoung.presentation.viewmodel.pruchase_history.PurchaseHistoryViewModel
 
 @Composable
 fun PurchaseHistoryScreen(
