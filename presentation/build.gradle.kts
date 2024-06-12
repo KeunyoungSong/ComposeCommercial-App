@@ -64,6 +64,8 @@ dependencies {
 	// 유지보수 의존성
 	implementation(libs.firebase.crashlytics)
 	
+	implementation("com.google.android.gms:play-services-ads:23.1.0")
+	
 	
 	implementation(libs.androidx.core.ktx)
 	implementation(libs.androidx.lifecycle.runtime.ktx)
