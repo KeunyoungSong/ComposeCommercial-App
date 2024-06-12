@@ -1,6 +1,5 @@
 package com.keunyoung.presentation.viewmodel.category
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController

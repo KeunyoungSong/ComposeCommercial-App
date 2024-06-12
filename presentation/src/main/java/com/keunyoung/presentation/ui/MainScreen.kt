@@ -83,12 +83,14 @@ fun MainHeader(viewModel: MainViewModel, navHostController: NavHostController, c
 	TopAppBar(title = {
 		val title = NavigationUtils.findDestination(currentRoute).title
 		Text(text = title)
-	}, navigationIcon = {
-		if (!MainNav.isMainRoute(currentRoute)) {
+	}, navigationIcon = if (navHostController.previousBackStackEntry != null && !MainNav.isMainRoute(currentRoute)) {
+		{
 			IconButton(onClick = { navHostController.popBackStack() }) {
 				Icon(Icons.Filled.ArrowBack, contentDescription = null)
 			}
 		}
+	} else {
+		{  }
 	}, actions = {
 		if (MainNav.isMainRoute(currentRoute)) {
 			IconButton(onClick = { viewModel.openSearchForm(navHostController) }) {
@@ -101,6 +103,7 @@ fun MainHeader(viewModel: MainViewModel, navHostController: NavHostController, c
 	})
 }
 
+//if (!MainNav.isMainRoute(currentRoute) && currentRoute != MainNav.Home.route) {
 @Composable
 fun MainBottomNavigationBar(navController: NavHostController, currentRoute: String?) {
 	val bottomNavigationItems = listOf(

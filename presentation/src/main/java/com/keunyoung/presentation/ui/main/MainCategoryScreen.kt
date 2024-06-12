@@ -1,5 +1,6 @@
 package com.keunyoung.presentation.ui.main
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,10 +15,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.keunyoung.presentation.viewmodel.MainViewModel
 
@@ -42,13 +46,17 @@ fun MainCategoryScreen(
 						categoryList[index]
 					)
 				}) {
-				Text(
-					text = categoryList[index].categoryName,
-					modifier = Modifier
-						.fillMaxSize()
-						.padding(10.dp),
-					textAlign = TextAlign.Center
-				)
+				Box(
+					contentAlignment = Alignment.Center,
+					modifier = Modifier.fillMaxSize()
+				) {
+					Text(
+						text = categoryList[index].categoryName,
+						textAlign = TextAlign.Center,
+						fontSize = 16.sp,
+						fontWeight = FontWeight.Bold
+					)
+				}
 			}
 		}
 	}
