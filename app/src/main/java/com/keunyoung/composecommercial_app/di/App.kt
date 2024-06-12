@@ -1,6 +1,7 @@
 package com.keunyoung.composecommercial_app.di
 
 import android.app.Application
+import com.google.android.gms.ads.MobileAds
 import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.HiltAndroidApp
 
@@ -10,5 +11,6 @@ class App : Application() {
 		super.onCreate()
 		// TODO 이후 키 적용 방식 변경
 		KakaoSdk.init(this, "022a07c1302ea712dc8d469b75938369")
+		MobileAds.initialize(this)
 		}
 }
