@@ -1,6 +1,5 @@
 package com.keunyoung.presentation.ui.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,16 +10,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import com.keunyoung.presentation.R
 import com.keunyoung.presentation.model.BannerListVM
 import kotlinx.coroutines.delay
 
@@ -32,27 +31,28 @@ fun BannerListCard(presentationVM: BannerListVM) {
 		autoScrollInfinity(pagerState = pagerState)
 	}
 	HorizontalPager(count = presentationVM.model.imageList.size, state = pagerState) { pageNumber ->
-		Card(
-			shape = RoundedCornerShape(8.dp),
+		Card(shape = RoundedCornerShape(8.dp),
 			modifier = Modifier
 				.fillMaxWidth()
-				.padding(10.dp)
-				.shadow(10.dp),
-			onClick = {presentationVM.openBannerList(presentationVM.model.bannerId)}
-		) {
-			Image(
-				painter = painterResource(id = R.drawable.product_image),
+				.padding(10.dp),
+			onClick = { presentationVM.openBannerList(presentationVM.model.bannerId) }) {
+			AsyncImage(
+				model = presentationVM.model.imageList[pageNumber],
 				contentDescription = null,
 				contentScale = ContentScale.Crop,
 				modifier = Modifier
 					.fillMaxWidth()
 					.aspectRatio(2f)
 			)
-		}
-		Box(
-			modifier = Modifier.fillMaxWidth(),
-		) {
-			Text("pageNumber $pageNumber")
+			Box(
+				modifier = Modifier.fillMaxWidth()
+			) {
+				Text(
+					"PageNumber ${pageNumber + 1}",
+					textAlign = TextAlign.End,
+					modifier = Modifier.align(Alignment.BottomEnd).padding(2.dp)
+				)
+			}
 		}
 	}
 }

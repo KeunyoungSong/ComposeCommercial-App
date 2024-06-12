@@ -3,6 +3,7 @@ package com.keunyoung.presentation.ui.purchase_history
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.keunyoung.domain.model.BasketProduct
 import com.keunyoung.domain.model.PurchaseHistory
 import com.keunyoung.presentation.R
@@ -49,8 +51,8 @@ fun LazyListScope.PurchaseHistoryCard(purchaseHistory: PurchaseHistory) {
 	items(purchaseHistory.basketList.size) { index ->
 		val currentItem = purchaseHistory.basketList[index]
 		Row(modifier = Modifier.padding(10.dp)) {
-			Image(
-				painter = painterResource(R.drawable.product_image),
+			AsyncImage(
+				model = currentItem.product.imageUrl,
 				contentDescription = null,
 				contentScale = ContentScale.Crop,
 				modifier = Modifier.size(60.dp)

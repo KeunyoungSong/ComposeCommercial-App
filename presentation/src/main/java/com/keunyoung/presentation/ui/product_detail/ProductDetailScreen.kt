@@ -1,7 +1,5 @@
 package com.keunyoung.presentation.ui.product_detail
 
-import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,12 +27,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.keunyoung.presentation.R
+import coil.compose.AsyncImage
 import com.keunyoung.presentation.ui.theme.Purple80
 import com.keunyoung.presentation.utils.NumberUtils
 import com.keunyoung.presentation.viewmodel.product_detail.ProductDetailViewModel
@@ -49,8 +46,8 @@ fun ProductDetailScreen(productId: String, viewModel: ProductDetailViewModel = h
 	}
 	Column(modifier = Modifier.fillMaxSize()) {
 		Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-			Image(
-				painter = painterResource(id = R.drawable.product_image),
+			AsyncImage(
+				model = product?.imageUrl,
 				contentDescription = null,
 				modifier = Modifier
 					.fillMaxWidth()
@@ -69,8 +66,8 @@ fun ProductDetailScreen(productId: String, viewModel: ProductDetailViewModel = h
 			Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.Top) {
 				Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(10.dp)) {
 					Card(modifier = Modifier.size(50.dp), shape = CircleShape) {
-						Image(
-							painter = painterResource(id = R.drawable.product_image),
+						AsyncImage(
+							model = product?.imageUrl,
 							contentDescription = null,
 							modifier = Modifier.fillMaxSize(),
 							contentScale = ContentScale.Crop
@@ -97,7 +94,6 @@ fun ProductDetailScreen(productId: String, viewModel: ProductDetailViewModel = h
 			Spacer(modifier = Modifier.width(12.dp))
 			Button(
 				onClick = { viewModel.addBasket(product) },
-				colors = ButtonDefaults.buttonColors(containerColor = Purple80),
 				shape = RoundedCornerShape(12.dp)
 			) {
 				Row(verticalAlignment = Alignment.CenterVertically) {

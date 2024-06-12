@@ -1,5 +1,6 @@
 package com.keunyoung.presentation.ui.main
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -37,33 +38,36 @@ fun MainHomeScreen(navHostController: NavHostController, viewModel: MainViewMode
 	val adId = "ca-app-pub-4798887709319566/9803580975"
 	val adRequest = AdRequest.Builder().build()
 	
-	LazyVerticalGrid(columns = GridCells.Fixed(columnCount)) {
-		items(modelList.size, span = { index ->
-			val item = modelList[index]
-			val spanCount = getSpanCountByType(item.model.type, columnCount)
-			GridItemSpan(spanCount)
-		}) { index ->
-			when (val item = modelList[index]) {
-				is BannerVM -> BannerCard(presentationVM = item)
-				is BannerListVM -> BannerListCard(presentationVM = item)
-				is ProductVM -> ProductCard(navHostController = navHostController, presentationVM = item)
-				is CarouselVM -> CarouselCard(navHostController = navHostController, presentationVM = item)
-				is RankingVM -> RankingCard(navHostController = navHostController, presentationVM = item)
+	Column {
+		AndroidView(modifier = Modifier
+			.fillMaxWidth()
+			.height(50.dp), factory = {
+			AdView(it).apply {
+				setAdSize(AdSize.BANNER)
+				adUnitId = testId
+				loadAd(adRequest)
+			}
+		}, update = {
+			it.loadAd(adRequest)
+		})
+		LazyVerticalGrid(columns = GridCells.Fixed(columnCount)) {
+			items(modelList.size, span = { index ->
+				val item = modelList[index]
+				val spanCount = getSpanCountByType(item.model.type, columnCount)
+				GridItemSpan(spanCount)
+			}) { index ->
+				when (val item = modelList[index]) {
+					is BannerVM -> BannerCard(presentationVM = item)
+					is BannerListVM -> BannerListCard(presentationVM = item)
+					is ProductVM -> ProductCard(navHostController = navHostController, presentationVM = item)
+					is CarouselVM -> CarouselCard(
+						navHostController = navHostController, presentationVM = item
+					)
+					is RankingVM -> RankingCard(navHostController = navHostController, presentationVM = item)
+				}
 			}
 		}
 	}
-	
-	AndroidView(modifier = Modifier
-		.fillMaxWidth()
-		.height(50.dp), factory = {
-		AdView(it).apply {
-			setAdSize(AdSize.BANNER)
-			adUnitId = testId
-			loadAd(adRequest)
-		}
-	}, update = {
-		it.loadAd(adRequest)
-	})
 	
 }
 

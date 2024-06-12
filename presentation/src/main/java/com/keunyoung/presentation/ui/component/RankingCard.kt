@@ -1,6 +1,5 @@
 package com.keunyoung.presentation.ui.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,16 +19,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.keunyoung.domain.model.Product
-import com.keunyoung.presentation.R
 import com.keunyoung.presentation.model.RankingVM
 
 private const val DEFAULT_RANKING_ITEM_COUNT = 3
@@ -41,9 +39,10 @@ fun RankingCard(navHostController: NavHostController, presentationVM: RankingVM)
 	val pageCount = presentationVM.model.productList.size / DEFAULT_RANKING_ITEM_COUNT
 	
 	Column {
-		Text(text = presentationVM.model.title, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+		Text(text = presentationVM.model.title, fontSize = 16.sp, fontWeight = FontWeight.SemiBold,
+			modifier = Modifier.padding(10.dp))
 		HorizontalPager(
-			count = pageCount, state = pagerState, contentPadding = PaddingValues(end = 140.dp)
+			count = pageCount, state = pagerState, contentPadding = PaddingValues(end = 70.dp)
 		) { index ->
 			Column {
 				RankingProductCard(
@@ -83,20 +82,20 @@ fun RankingProductCard(index: Int, model: Product, rankingVM: RankingVM, onClick
 				.fillMaxWidth()
 		) {
 			
-			Text("${index + 1}", fontWeight = FontWeight.Bold)
-			Image(painter = painterResource(id = R.drawable.product_image),
+			Text("${index + 1}", fontWeight = FontWeight.Bold, modifier = Modifier.padding(end = 4.dp))
+			AsyncImage(model = model.imageUrl,
 				contentDescription = null,
 				contentScale = ContentScale.Crop,
 				modifier = Modifier
-					.width(70.dp)
-					.aspectRatio(0.7f)
+					.width(120.dp)
+					.aspectRatio(4/3f)
 					.clickable { onClick(model) })
 			Column(modifier = Modifier.padding(10.dp, 0.dp)) {
 				Text(
-					fontSize = 14.sp, text = model.shop.shopName, modifier = Modifier.padding(bottom = 4.dp)
+					fontSize = 14.sp, text = model.shop.shopName, modifier = Modifier.padding(bottom = 2.dp)
 				)
 				Text(
-					fontSize = 14.sp, text = model.productName, modifier = Modifier.padding(bottom = 8.dp)
+					fontSize = 14.sp, text = model.productName, modifier = Modifier.padding(bottom = 4.dp)
 				)
 				Price(product = model)
 			}

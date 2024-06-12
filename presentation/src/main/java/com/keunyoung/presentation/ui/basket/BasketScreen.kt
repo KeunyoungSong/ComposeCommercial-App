@@ -1,6 +1,5 @@
 package com.keunyoung.presentation.ui.basket
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,15 +28,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.keunyoung.domain.model.BasketProduct
 import com.keunyoung.domain.model.Product
-import com.keunyoung.presentation.R
 import com.keunyoung.presentation.ui.component.Price
 import com.keunyoung.presentation.ui.popupSnackBar
 import com.keunyoung.presentation.ui.theme.Purple80
@@ -64,7 +62,7 @@ fun BasketScreen(snackbarHostState: SnackbarHostState, viewModel: BasketViewMode
 	Column(
 		Modifier
 			.fillMaxSize()
-			.padding(20.dp)) {
+			.padding(16.dp)) {
 		LazyColumn(modifier = Modifier
 			.fillMaxSize()
 			.weight(1f), contentPadding = PaddingValues(10.dp)) {
@@ -94,12 +92,12 @@ fun BasketProductCard(basketProduct: BasketProduct, removeProduct: (Product) -> 
 				.padding(10.dp)
 				.fillMaxWidth()
 		) {
-			Image(
-				painter = painterResource(id = R.drawable.product_image),
+			AsyncImage(
+				model = basketProduct.product.imageUrl,
 				contentDescription = null,
 				contentScale = ContentScale.Crop,
 				modifier = Modifier
-					.width(120.dp)
+					.width(80.dp)
 					.aspectRatio(1f)
 			)
 			Column(
@@ -129,6 +127,7 @@ fun BasketProductCard(basketProduct: BasketProduct, removeProduct: (Product) -> 
 		}
 		IconButton(
 			onClick = { removeProduct(basketProduct.product) }, modifier = Modifier.align(Alignment.TopEnd)
+				.padding(start = 20.dp)
 		) {
 			Icon(Icons.Filled.Close, contentDescription = null)
 		}
