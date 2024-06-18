@@ -61,6 +61,7 @@ fun MyPageScreen(viewModel: MainViewModel, googleSignInClient: GoogleSignInClien
 			}
 		}
 	val kakaoCallback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+		Log.d("KAKAO", "MyPageScreen: token: $token, error: $error")
 		when {
 			error != null -> {
 				Log.e("Kakao", "카카오 계정 로그인 실패", error)
