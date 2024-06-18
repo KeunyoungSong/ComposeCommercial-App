@@ -10,7 +10,7 @@ plugins {
 android {
 	signingConfigs {
 		create("release") {
-			storeFile = file("/Users/brandon/Documents/android-key/test.jks.kts")
+			storeFile = file("/Users/brandon/Documents/keys/android-release/ComposeCommercial.jks.kts")
 			storePassword = "123456"
 			keyAlias = "test-key"
 			keyPassword = "123456"
