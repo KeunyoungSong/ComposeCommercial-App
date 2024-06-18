@@ -99,7 +99,7 @@ fun Price(product: Product) {
 					fontSize = 16.sp,
 					fontWeight = FontWeight.Bold,
 					text = "${product.price.finalPrice}원",
-					color = Purple80
+					color = Color.Red
 				)
 			}
 		}
